@@ -10,7 +10,7 @@ module.exports = {
         console.log('数据库内已存在该侦查机关，名称是：', data[0].NAME_OF_INVESTIGATION_AGENCY);
         res.status(201).send({
           registerOk: false,
-          policeNum: data[0].NAME_OF_INVESTIGATION_AGENCY
+          policeNum: data[0].INVESTIGATION_AGENCY_NUMBER
         });
         //将数据库中侦查机关的编号与判决书的编号绑定
         userDao.bindPolicenum([data[0].INVESTIGATION_AGENCY_NUMBER, JUDGMENT_NUMBER], (err, data) => {
@@ -34,7 +34,7 @@ module.exports = {
             console.log('公安机关信息登记成功');
             res.status(201).send({
               registerOk: true,
-              policeNum: NAME_OF_INVESTIGATION_AGENCY
+              policeNum: INVESTIGATION_AGENCY_NUMBER
             });
           }
         });

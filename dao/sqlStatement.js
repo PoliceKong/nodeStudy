@@ -30,7 +30,12 @@ const sqlStatement = {
   select_police: 'select * from investigation_agency_information_form where NAME_OF_INVESTIGATION_AGENCY=? and INVESTIGATIVE_AGENCY_LEVEL=?;',
   //根据判决书编号，绑定公安机关编号
   bind_police_num: 'update judgment_information_form set INVESTIGATION_AGENCY_NUMBER =? where JUDGMENT_NUMBER =?;',
-
+  //查询同名公诉机关（检察院）
+  select_procuratorate: 'select * from public_prosecution_information_form where NAME_OF_PROCURATORATE =? and PROCURATORATE_LEVEL=?;',
+  //注册新的公诉机关
+  register_procuratorate: 'insert into public_prosecution_information_form (PROCURATORATE_NUMBER,NAME_OF_PROCURATORATE,PROCURATORATE_LEVEL) values(?,?,?);',
+  //绑定公诉记挂编号与判决文书编号
+  bind_procuratorate_num: 'update judgment_information_form set PROCURATORATE_NUMBER =? where JUDGMENT_NUMBER =?;',
 
 
 
