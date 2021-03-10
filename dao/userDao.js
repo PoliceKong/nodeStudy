@@ -77,7 +77,7 @@ module.exports = {
   },
   //查询同名法院
   selectCourt(array, callback) {
-    dbpool.connect(sqlStatement.selectCourt, array, callback)
+    dbpool.connect(sqlStatement.select_court, array, callback)
   },
   //注册新的法院
   registerCourt(array, callback) {
