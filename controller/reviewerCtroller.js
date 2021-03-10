@@ -1,7 +1,4 @@
 const userDao = require("../dao/userDao");
-const {
-  use
-} = require("../routers/indexRoute");
 const randomNum = require("./randomNumber");
 module.exports = {
 
