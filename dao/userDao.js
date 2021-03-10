@@ -74,11 +74,18 @@ module.exports = {
   //绑定公诉机关编号到判决文书
   bindProcuratorateNum(array, callback) {
     dbpool.connect(sqlStatement.bind_procuratorate_num, array, callback)
+  },
+  //查询同名法院
+  selectCourt(array, callback) {
+    dbpool.connect(sqlStatement.selectCourt, array, callback)
+  },
+  //注册新的法院
+  registerCourt(array, callback) {
+    dbpool.connect(sqlStatement.register_court, array, callback)
+  },
+  //绑定法院编号到判决文书
+  bindCourtNum(array, callback) {
+    dbpool.connect(sqlStatement.bind_court_num, array, callback)
   }
-
-
-
-
-
 
 }

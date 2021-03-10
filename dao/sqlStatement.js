@@ -36,6 +36,12 @@ const sqlStatement = {
   register_procuratorate: 'insert into public_prosecution_information_form (PROCURATORATE_NUMBER,NAME_OF_PROCURATORATE,PROCURATORATE_LEVEL) values(?,?,?);',
   //绑定公诉记挂编号与判决文书编号
   bind_procuratorate_num: 'update judgment_information_form set PROCURATORATE_NUMBER =? where JUDGMENT_NUMBER =?;',
+  //查询同名法院
+  select_court: 'select * from information_form_of_trial_agency where COURT_NAME=? and COURT_LEVEL=?;',
+  //注册新的法院信息
+  register_court: 'insert into information_form_of_trial_agency (COURT_NUMBER,COURT_NAME,COURT_LEVEL) values (?,?,?);',
+  //绑定新的法院信息
+  bind_court_num: 'update judgment_information_form set COURT_NUMBER =? where JUDGMENT_NUMBER =?;',
 
 
 

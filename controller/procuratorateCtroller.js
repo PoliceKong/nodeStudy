@@ -26,26 +26,29 @@ module.exports = {
         });
       } else {
         let PROCURATORATE_NUMBER = "G" + randomNum.randomNumber(); //生成公诉机关唯一编码
-        userDao.registerProcuratorate([], (err, data) => {
-
+        userDao.registerProcuratorate([PROCURATORATE_NUMBER, NAME_OF_PROCURATORATE, PROCURATORATE_LEVEL], (err, data) => {
+          if (err) {
+            console.log('注册公诉机关时遇到问题，err信息是：', err);
+          } else {
+            console.log('公诉机关注册成功');
+            res.status(201).send({
+              registerPROk: true,
+              procuratorateNumber: PROCURATORATE_NUMBER
+            });
+          }
         });
-
-
-
-
-
-
+        userDao.bindProcuratorateNum([PROCURATORATE_NUMBER, JUDGMENT_NUMBER], (err, data) => {
+          if (err) {
+            console.log('绑定公诉机关编号到判决文书失败，err是：', err);
+          } else {
+            if (data.changedRows == 0) {
+              console.log('数据库已经存在该公诉机关绑定');
+            } else {
+              console.log('绑定公诉机关编号到判决文书成功');
+            }
+          }
+        });
       }
     });
-
-
-
-
-
   }
-
-
-
-
-
 }
