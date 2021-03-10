@@ -50,6 +50,10 @@ const sqlStatement = {
   select_pub_pro: 'select * from prosecutor_information_form where PUBLIC_PROSECUTOR_NAME=? and PROCURATORATE_NUMBER=?;',
   //注册新的公诉人员
   register_pub_pro: 'insert into prosecutor_information_form (PUBLIC_PROSECUTOR_NUMBER,PUBLIC_PROSECUTOR_NAME,PROCURATORATE_NUMBER) values (?,?,?);',
+  //查询同名审理人员
+  select_reviewer: 'select * from trial_staff_information_form where NAME_OF_TRIAL_OFFICER=? and TRIAL_STAFF_CATEGORY=? and COURT_NUMBER=?;',
+  //注册新的审理人员
+  register_reviewer: 'insert into trial_staff_information_form (REVIEWER_NUMBER,NAME_OF_TRIAL_OFFICER,TRIAL_STAFF_CATEGORY,COURT_NUMBER) values (?,?,?,?);',
 
 
 

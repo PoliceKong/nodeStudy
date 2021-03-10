@@ -10,6 +10,7 @@ const procuratorateCtroller = require('../controller/procuratorateCtroller');
 const courtCtroller = require('../controller/courtCtroller');
 const investigtionCtro = require('../controller/investigationCtro');
 const prosecutorCtroller = require('../controller/prosecutorCtroller');
+const reviewerCtroller = require('../controller/reviewerCtroller');
 const route = express.Router();
 //使用post方法拦截网址
 route.post('/login.do', userCtrl.userCtrl); //测试用
@@ -23,6 +24,7 @@ route.post('/procuratorate.do', procuratorateCtroller.insertProcuratorate); //�
 route.post('/court.do', courtCtroller.insertCourt); //审理机关（法院）登记
 route.post('/investigation.do', investigtionCtro.insertInvestigation);
 route.post('/prosecutor.do', prosecutorCtroller.insertProsecutor);
+route.post('/reviewer.do', reviewerCtroller.insertReviewer);
 
 
 

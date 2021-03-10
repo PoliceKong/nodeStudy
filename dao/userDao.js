@@ -102,7 +102,15 @@ module.exports = {
   //注册新的公诉人员
   registerPubPro(array, callback) {
     dbpool.connect(sqlStatement.register_pub_pro, array, callback);
-  }
+  },
+  //查询同名审理人员
+  selectReviewer(array, callback) {
+    dbpool.connect(sqlStatement.select_reviewer, array, callback);
+  },
+  //注册新的审理人员
+  registerReviewer(array, callback) {
+    dbpool.connect(sqlStatement.register_reviewer, array, callback);
+  },
 
 
 
