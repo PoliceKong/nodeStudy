@@ -42,6 +42,14 @@ const sqlStatement = {
   register_court: 'insert into information_form_of_trial_agency (COURT_NUMBER,COURT_NAME,COURT_LEVEL) values (?,?,?);',
   //绑定新的法院信息
   bind_court_num: 'update judgment_information_form set COURT_NUMBER =? where JUDGMENT_NUMBER =?;',
+  //查询同名侦查人员
+  select_investigation: 'select * from investigator_information_form where INVESTIGATOR_NAME=? and INVESTIGATION_AGENCY_NUMBER=?;',
+  //注册新的侦查人员
+  register_investigation: 'insert into investigator_information_form (INVESTIGATOR_NUMBER,INVESTIGATOR_NAME,INVESTIGATION_AGENCY_NUMBER) values (?,?,?);',
+  //查询同名公诉人员
+  select_pub_pro: 'select * from prosecutor_information_form where PUBLIC_PROSECUTOR_NAME=? and PROCURATORATE_NUMBER=?;',
+  //注册新的公诉人员
+  register_pub_pro: 'insert into prosecutor_information_form (PUBLIC_PROSECUTOR_NUMBER,PUBLIC_PROSECUTOR_NAME,PROCURATORATE_NUMBER) values (?,?,?);',
 
 
 

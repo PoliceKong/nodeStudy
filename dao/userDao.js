@@ -86,6 +86,25 @@ module.exports = {
   //绑定法院编号到判决文书
   bindCourtNum(array, callback) {
     dbpool.connect(sqlStatement.bind_court_num, array, callback)
+  },
+  //查询同名侦查人员
+  selectInvestigation(array, callback) {
+    dbpool.connect(sqlStatement.select_investigation, array, callback);
+  },
+  //注册新的侦查人员
+  registerInvestigation(array, callback) {
+    dbpool.connect(sqlStatement.register_investigation, array, callback);
+  },
+  //查询同名公诉人员
+  selectPubPro(array, callback) {
+    dbpool.connect(sqlStatement.select_pub_pro, array, callback);
+  },
+  //注册新的公诉人员
+  registerPubPro(array, callback) {
+    dbpool.connect(sqlStatement.register_pub_pro, array, callback);
   }
+
+
+
 
 }
