@@ -111,6 +111,14 @@ module.exports = {
   registerReviewer(array, callback) {
     dbpool.connect(sqlStatement.register_reviewer, array, callback);
   },
+  //查询同名书记员
+  selectClerk(array, callback) {
+    dbpool.connect(sqlStatement.select_clerk, array, callback);
+  },
+  //登记新的书记员
+  regsiterClerk(array, callback) {
+    dbpool.connect(sqlStatement.regsiter_clerk, array, callback);
+  },
 
 
 

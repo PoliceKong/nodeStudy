@@ -54,6 +54,10 @@ const sqlStatement = {
   select_reviewer: 'select * from trial_staff_information_form where NAME_OF_TRIAL_OFFICER=? and TRIAL_STAFF_CATEGORY=? and COURT_NUMBER=?;',
   //注册新的审理人员
   register_reviewer: 'insert into trial_staff_information_form (REVIEWER_NUMBER,NAME_OF_TRIAL_OFFICER,TRIAL_STAFF_CATEGORY,COURT_NUMBER) values (?,?,?,?);',
+  //查询同名书记员
+  select_clerk: 'select * from clerk_information_form where CLERK_NAME=? and COURT_NUMBER=?;',
+  //注册新的书记员
+  regsiter_clerk: 'insert into clerk_information_form (CLERK_NUMBER,CLERK_NAME,COURT_NUMBER) values(?,?,?);',
 
 
 
