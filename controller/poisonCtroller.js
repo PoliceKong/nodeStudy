@@ -13,15 +13,21 @@ module.exports = {
     userDao.registerPioson([POISON_NUMBER, SCIENTIFIC_NAME_OF_POISON, POISON_ALIAS_01, POISON_ALIAS_02, TOXIC_CHEMICAL_COMPOSITION, ACTUAL_MEASUREMENT_OF_POISON], (err, data) => {
       if (err) {
         console.log('毒害物登记产生的err是：', err);
+        res.status(500).send();
       } else {
         console.log('毒害物登记成功');
         userDao.selectPoisonnumFoodnum([FOOD_NUMBER, POISON_NUMBER], (err, data) => {
           if (data.length !== 0) {
             console.log('该毒害物编号与案件编号已经绑定，无需重复绑定');
+            res.status(201).send({
+              registerPoisonOk: true,
+              poisonNumber: POISON_NUMBER
+            })
           } else {
             userDao.bindCasefood_Pioson([FOOD_NUMBER, POISON_NUMBER], (err, data) => {
               if (err) {
                 console.log('毒害物编号与案件编号绑定失败，err是：', err);
+                res.status(500).send();
               } else {
                 console.log('毒害物与食品绑定成功');
                 res.status(201).send({

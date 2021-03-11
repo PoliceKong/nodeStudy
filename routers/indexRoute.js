@@ -1,5 +1,4 @@
 const express = require("express");
-const userCtrl = require("../controller/userCtrl");
 const caseController = require('../controller/caseCtroller');
 const suspectCtroller = require("../controller/suspectCtroller");
 const caseFoodCtroller = require('../controller/caseFoodController');
@@ -15,7 +14,7 @@ const clerkCtroller = require('../controller/clerkCtroller');
 const jiandingjigouCtroller = require('../controller/jiandingjigouCtroller');
 const route = express.Router();
 //使用post方法拦截网址
-route.post('/login.do', userCtrl.userCtrl); //测试用
+
 route.post('/caseRg.do', caseController.insertCase); //案件登记
 route.post('/suspect.do', suspectCtroller.insertSuspect); //嫌疑人登记
 route.post('/casefood.do', caseFoodCtroller.insertCaseFood); //涉案食品登记

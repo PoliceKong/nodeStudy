@@ -3,9 +3,6 @@ const express = require("express"); //服务器包
 const logger = require("morgan"); //日志包
 const cors = require('cors') //跨域访问包
 const route = require("./routers/index");
-const {
-  json
-} = require("express");
 
 //初始化依赖文件
 logger.format('morgan-log', '[morgan-log] :method :url :status');
