@@ -131,6 +131,10 @@ module.exports = {
   bindPoisonnumAndJDJGnum(array, callback) {
     dbpool.connect(sqlStatement.bind_poisonnum_jdjgnum, array, callback);
   },
+  //查询绑定的毒害物编号与鉴定机构编号
+  selectpoisonnumJdjgnum(array, callback) {
+    dbpool.connect(sqlStatement.selectPoisonnum_jdjgnum, array, callback);
+  }
 
 
 

@@ -64,6 +64,8 @@ const sqlStatement = {
   register_jiandingjigou: 'insert into appraisal_agency_information_form (IDENTIFICATION_AGENCY_NUMBER,NAME_OF_APPRAISAL_AGENCY,TYPE_OF_CERTIFICATION_AGENCY,ADMINISTRATIVE_DIVISIONS,IDENTIFICATION_SCOPE,APPRAISAL_QUALIFICATION,APPRAISER_NAME) values (?,?,?,?,?,?,?);',
   //绑定毒害物编号与鉴定机构编号
   bind_poisonnum_jdjgnum: 'insert into poisons_and_identification_agencies_form (POISON_NUMBER,IDENTIFICATION_AGENCY_NUMBER) values (?,?);',
+  //查询重复绑定的毒害物编号与鉴定机构编号
+  selectPoisonnum_jdjgnum: 'select * from poisons_and_identification_agencies_form where POISON_NUMBER =? and IDENTIFICATION_AGENCY_NUMBER=?;',
 
 
 

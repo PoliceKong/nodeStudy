@@ -18,12 +18,17 @@ module.exports = {
           registerAgencyOk: false,
           identificationAgencyNumber: data[0].IDENTIFICATION_AGENCY_NUMBER
         });
-        userDao.bindPoisonnumAndJDJGnum([POISON_NUMBER, data[0].IDENTIFICATION_AGENCY_NUMBER], (err, data) => {
-          if (err) {
-            console.log('毒害物编号与鉴定机构编号绑定失败，err是：', err);
+        userDao.selectpoisonnumJdjgnum([POISON_NUMBER, data[0].IDENTIFICATION_AGENCY_NUMBER], (err, data) => {
+          if (data.length !== 0) {
+            console.log('该毒害与鉴定机构已经绑定，无需重复绑定');
           } else {
-            console.log('毒害物编号与鉴定机构编号绑定成功');
-
+            userDao.bindPoisonnumAndJDJGnum([POISON_NUMBER, data[0].IDENTIFICATION_AGENCY_NUMBER], (err, data) => {
+              if (err) {
+                console.log('毒害物编号与鉴定机构编号绑定失败，err是：', err);
+              } else {
+                console.log('毒害物编号与鉴定机构编号绑定成功');
+              }
+            });
           }
         });
       } else {
@@ -37,18 +42,22 @@ module.exports = {
               registerAgencyOk: true,
               identificationAgencyNumber: IDENTIFICATION_AGENCY_NUMBER
             });
-            userDao.bindPoisonnumAndJDJGnum([POISON_NUMBER], (err, data) => {
-              if (err) {
-                console.log('绑定毒害物编号与鉴定机构编号失败，err是：', err);
+            userDao.selectpoisonnumJdjgnum([POISON_NUMBER, IDENTIFICATION_AGENCY_NUMBER], (err, data) => {
+              if (data.length !== 0) {
+                console.log('该毒害与鉴定机构已经绑定，无需重复绑定');
               } else {
-                console.log('毒害物编号与鉴定机构编号绑定成功');
+                userDao.bindPoisonnumAndJDJGnum([POISON_NUMBER, IDENTIFICATION_AGENCY_NUMBER], (err, data) => {
+                  if (err) {
+                    console.log('绑定毒害物编号与鉴定机构编号失败，err是：', err);
+                  } else {
+                    console.log('毒害物编号与鉴定机构编号绑定成功');
+                  }
+                });
               }
-
             });
           }
         });
       }
-
     });
   }
 }
