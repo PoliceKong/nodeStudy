@@ -25,7 +25,7 @@ module.exports = {
 
         });
       } else {
-        let PROCURATORATE_NUMBER = "G" + randomNum.randomNumber(); //生成公诉机关唯一编码
+        let PROCURATORATE_NUMBER = "Gongsu" + randomNum.randomNumber(); //生成公诉机关唯一编码
         userDao.registerProcuratorate([PROCURATORATE_NUMBER, NAME_OF_PROCURATORATE, PROCURATORATE_LEVEL], (err, data) => {
           if (err) {
             console.log('注册公诉机关时遇到问题，err信息是：', err);

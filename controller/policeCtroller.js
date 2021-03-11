@@ -26,7 +26,7 @@ module.exports = {
           }
         })
       } else {
-        let INVESTIGATION_AGENCY_NUMBER = "P" + randomNum.randomNumber(); //生成侦查机关编号
+        let INVESTIGATION_AGENCY_NUMBER = "Gongan" + randomNum.randomNumber(); //生成侦查机关编号
         userDao.registerPolice([INVESTIGATION_AGENCY_NUMBER, NAME_OF_INVESTIGATION_AGENCY, INVESTIGATIVE_AGENCY_LEVEL], (err, data) => {
           if (err) {
             console.log('登记公安机关信息出错，err是：', err);

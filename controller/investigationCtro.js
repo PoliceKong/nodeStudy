@@ -15,7 +15,7 @@ module.exports = {
         });
 
       } else {
-        let INVESTIGATOR_NUMBER = "Z" + randomNum.randomNumber(); //生成侦查人员编号
+        let INVESTIGATOR_NUMBER = "Police" + randomNum.randomNumber(); //生成侦查人员编号
         userDao.registerInvestigation([INVESTIGATOR_NUMBER, INVESTIGATOR_NAME, INVESTIGATION_AGENCY_NUMBER], (err, data) => {
           if (err) {
             console.log('侦查人员注册失败，err是：', err);

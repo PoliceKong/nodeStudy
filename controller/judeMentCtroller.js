@@ -21,36 +21,29 @@ module.exports = {
           if (err) {
             console.log('判决书注册是遇到错误，err是：', err);
           } else {
-            console.log('判决书注册成功，data是：', data);
-          }
-          res.status(201).send({
-            judeMentOK: true,
-            caseNum: CASE_NUMBER,
-            judgmentNum: JUDGMENT_NUMBER
-          });
-
-        });
-
-        //绑定案件编号与判决书编号
-        userDao.bindCasenumJudgmentNum([CASE_NUMBER, JUDGMENT_NUMBER], (err, data) => {
-          if (err) {
-            console.log('案件编号与文书编号绑定失败，err是：', err);
-          } else {
-            console.log('案件编号与文书编号绑定成功');
-
+            console.log('判决书注册成功');
+            userDao.selectCasenunJudgmentnum([CASE_NUMBER, JUDGMENT_NUMBER], (err, data) => {
+              if (data.length !== 0) {
+                console.log('该判决书编号与案件编号已经绑定，无需重复绑定');
+              } else {
+                userDao.bindCasenumJudgmentNum([CASE_NUMBER, JUDGMENT_NUMBER], (err, data) => {
+                  if (err) {
+                    console.log('案件编号与文书编号绑定失败，err是：', err);
+                  } else {
+                    console.log('案件编号与文书编号绑定成功');
+                    res.status(201).send({
+                      judeMentOK: true,
+                      caseNum: CASE_NUMBER,
+                      judgmentNum: JUDGMENT_NUMBER
+                    });
+                  }
+                });
+              }
+            });
           }
         });
       }
-
     });
-
-
-
-
-
-
-
-
   }
 
 

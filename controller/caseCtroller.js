@@ -23,7 +23,7 @@ module.exports = {
       } else {
         // 无同名案件的情况下，执行注册，将新的案件信息写入数据库中
 
-        let CASE_NUMBER = "A" + randomNum.randomNumber(); //生成随机6位案件编号，唯一
+        let CASE_NUMBER = "Case" + randomNum.randomNumber(); //生成随机6位案件编号，唯一
 
         userDao.registerCase([CASE_NUMBER, CASE_NAME, CASE_SOURCE, TIME_OF_CASE, LOCATION_OF_CASE, AMOUNT_INVOLVED, NUMBER_OF_OFFENDERS, BRIEF_INTRODUCTION], (err, data) => {
 

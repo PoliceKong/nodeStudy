@@ -13,7 +13,7 @@ module.exports = {
         });
 
       } else {
-        let PUBLIC_PROSECUTOR_NUMBER = "GS" + randomNum.randomNumber();
+        let PUBLIC_PROSECUTOR_NUMBER = "GSR" + randomNum.randomNumber();
         userDao.registerPubPro([PUBLIC_PROSECUTOR_NUMBER, PUBLIC_PROSECUTOR_NAME, PROCURATORATE_NUMBER], (err, data) => {
           if (err) {
             console.log('注册新的公诉人员失败，err是：', err);

@@ -17,7 +17,7 @@ module.exports = {
           courtNumber: data[0].COURT_NUMBER
         });
       } else {
-        let COURT_NUMBER = "C" + randomNum.randomNumber();
+        let COURT_NUMBER = "Court" + randomNum.randomNumber();
         userDao.registerCourt([COURT_NUMBER, COURT_NAME, COURT_LEVEL], (err, data) => {
           if (err) {
             console.log('法院注册时遇到问题，err是：', err);

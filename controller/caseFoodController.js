@@ -7,32 +7,32 @@ module.exports = {
     let FOOD_TYPE = req.body.FOOD_TYPE; //获取食品类型
     let FOOD_INGREDIENTS = req.body.FOOD_INGREDIENTS; //获取成分
     let FOOD_QUANTITY = req.body.FOOD_QUANTITY; //获取食品数量
-    let FOOD_NUMBER = "F" + randomNum.randomNumber(); //生成唯一食品编号
+    let FOOD_NUMBER = "Food" + randomNum.randomNumber(); //生成唯一食品编号
 
     userDao.registerCaseFood([FOOD_NUMBER, FOOD_NAME, FOOD_TYPE, FOOD_INGREDIENTS, FOOD_QUANTITY], (err, data) => {
-
       if (err) {
         console.log('食品登记出现的错误是：', err);
       } else {
         console.log('食品登记成功，数据库返回的数据是：', data);
+        userDao.selectCasenumFoodnum([CASE_NUMBER, FOOD_NUMBER], (err, data) => {
+          if (data.length !== 0) {
+            console.log('该食品编号与案件已经绑定，无需重复绑定');
+          } else {
+            userDao.bindCaseFood_Case([CASE_NUMBER, FOOD_NUMBER], (err, data) => {
+              if (err) {
+                console.log('食品编号与案件编号绑定失败，err是：', err);
+              } else {
+                console.log('案件编号与食品编号绑定成功');
+                res.status(201).send({
+                  foodRegisterOk: true,
+                  foodNumber: FOOD_NUMBER
+                })
+              }
+            })
+          }
+        });
       }
     });
-    userDao.bindCaseFood_Case([CASE_NUMBER, FOOD_NUMBER], (err, data) => {
-      console.log('案件编号与食品编号绑定成功');
-      res.status(201).send({
-        foodRegisterOk: true,
-        foodNumber: FOOD_NUMBER
-      })
-    })
+
   }
-
-
-
-
-
-
-
-
-
-
 }

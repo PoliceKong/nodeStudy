@@ -17,6 +17,10 @@ module.exports = {
   registerSuspect(array, callback) {
     dbpool.connect(sqlStatement.register_suspect, array, callback)
   },
+  //查询案例编号与嫌疑人编号的绑定
+  selectCasenumSuspnum(array, callback) {
+    dbpool.connect(sqlStatement.select_casenum_suspnum, array, callback)
+  },
   //绑定案例编号与嫌疑人编号
   bindCaseNum_susNum(array, callback) {
     dbpool.connect(sqlStatement.bind_case_num_susp_num, array, callback)
@@ -27,6 +31,10 @@ module.exports = {
     dbpool.connect(sqlStatement.register_case_food, array, callback)
 
   },
+  //查询食品编号与案件编号的重复绑定
+  selectCasenumFoodnum(array, callback) {
+    dbpool.connect(sqlStatement.select_casenum_foodnum, array, callback)
+  },
   //绑定食品与案件编号
   bindCaseFood_Case(array, callback) {
     dbpool.connect(sqlStatement.bind_casefood_case, array, callback)
@@ -34,6 +42,10 @@ module.exports = {
   //登记毒害物
   registerPioson(array, callback) {
     dbpool.connect(sqlStatement.register_pioson, array, callback)
+  },
+  //查询毒害物编号与食品编号
+  selectPoisonnumFoodnum(array, callback) {
+    dbpool.connect(sqlStatement.select_piosonnum_foodnum, array, callback)
   },
   //绑定毒害物和食品编号
   bindCasefood_Pioson(array, callback) {
@@ -46,6 +58,10 @@ module.exports = {
   //登记判决书信息
   registerJudgment(array, callback) {
     dbpool.connect(sqlStatement.register_judgment, array, callback)
+  },
+  //查询案件编号与判决书编号的绑定情况
+  selectCasenunJudgmentnum(array, callback) {
+    dbpool.connect(sqlStatement.select_casenun_judgmentnum, array, callback)
   },
   //绑定案件编号与判决书编号
   bindCasenumJudgmentNum(array, callback) {
