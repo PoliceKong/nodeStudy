@@ -119,6 +119,18 @@ module.exports = {
   regsiterClerk(array, callback) {
     dbpool.connect(sqlStatement.regsiter_clerk, array, callback);
   },
+  //查询同名鉴定机构
+  selectJiandingjigou(array, callback) {
+    dbpool.connect(sqlStatement.select_jiandingjigou, array, callback);
+  },
+  //注册新的鉴定机构
+  registerJiandingjigou(array, callback) {
+    dbpool.connect(sqlStatement.register_jiandingjigou, array, callback);
+  },
+  //绑定鉴定机构编号与毒害物编号
+  bindPoisonnumAndJDJGnum(array, callback) {
+    dbpool.connect(sqlStatement.bind_poisonnum_jdjgnum, array, callback);
+  },
 
 
 

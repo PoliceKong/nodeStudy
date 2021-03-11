@@ -58,6 +58,12 @@ const sqlStatement = {
   select_clerk: 'select * from clerk_information_form where CLERK_NAME=? and COURT_NUMBER=?;',
   //注册新的书记员
   regsiter_clerk: 'insert into clerk_information_form (CLERK_NUMBER,CLERK_NAME,COURT_NUMBER) values(?,?,?);',
+  //查询同名的鉴定机构
+  select_jiandingjigou: 'select * from appraisal_agency_information_form where NAME_OF_APPRAISAL_AGENCY=? and ADMINISTRATIVE_DIVISIONS=?;',
+  //注册新的鉴定机构
+  register_jiandingjigou: 'insert into appraisal_agency_information_form (IDENTIFICATION_AGENCY_NUMBER,NAME_OF_APPRAISAL_AGENCY,TYPE_OF_CERTIFICATION_AGENCY,ADMINISTRATIVE_DIVISIONS,IDENTIFICATION_SCOPE,APPRAISAL_QUALIFICATION,APPRAISER_NAME) values (?,?,?,?,?,?,?);',
+  //绑定毒害物编号与鉴定机构编号
+  bind_poisonnum_jdjgnum: 'insert into poisons_and_identification_agencies_form (POISON_NUMBER,IDENTIFICATION_AGENCY_NUMBER) values (?,?);',
 
 
 
