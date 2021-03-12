@@ -1,7 +1,8 @@
-const userDao = require("../dao/userDao");
-const randomNum = require("./randomNumber");
+const userDao = require('../dao/userDao');
+const randomNum = require('./randomNumber');
 module.exports = {
   insertProsecutor(req, res) {
+    'use strict';
     let PUBLIC_PROSECUTOR_NAME = req.body.PUBLIC_PROSECUTOR_NAME; //获取公诉人员名称
     let PROCURATORATE_NUMBER = req.body.PROCURATORATE_NUMBER; //获取公诉机关（检察院）编号
     userDao.selectPubPro([PUBLIC_PROSECUTOR_NAME, PROCURATORATE_NUMBER], (err, data) => {
@@ -15,8 +16,8 @@ module.exports = {
             publicProsecutorNumber: data[0].PUBLIC_PROSECUTOR_NUMBER
           });
         } else {
-          let PUBLIC_PROSECUTOR_NUMBER = "GSR" + randomNum.randomNumber();
-          userDao.registerPubPro([PUBLIC_PROSECUTOR_NUMBER, PUBLIC_PROSECUTOR_NAME, PROCURATORATE_NUMBER], (err, data) => {
+          let PUBLIC_PROSECUTOR_NUMBER = 'GSR' + randomNum.randomNumber();
+          userDao.registerPubPro([PUBLIC_PROSECUTOR_NUMBER, PUBLIC_PROSECUTOR_NAME, PROCURATORATE_NUMBER], (err) => {
             if (err) {
               console.log('注册新的公诉人员失败，err是：', err);
               res.status(500).send();
@@ -30,22 +31,6 @@ module.exports = {
           });
         }
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     });
-
   }
-}
+};

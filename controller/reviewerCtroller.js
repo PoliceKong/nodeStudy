@@ -1,9 +1,9 @@
-const userDao = require("../dao/userDao");
-const randomNum = require("./randomNumber");
+const userDao = require('../dao/userDao');
+const randomNum = require('./randomNumber');
 module.exports = {
 
   insertReviewer(req, res) {
-
+    'use strict';
     let NAME_OF_TRIAL_OFFICER = req.body.NAME_OF_TRIAL_OFFICER; //获取审理人员姓名
     let TRIAL_STAFF_CATEGORY = req.body.TRIAL_STAFF_CATEGORY; //获取审理人员类别
     let COURT_NUMBER = req.body.COURT_NUMBER; //获取法院编号
@@ -18,8 +18,8 @@ module.exports = {
             reviewerNumber: data[0].REVIEWER_NUMBER
           });
         } else {
-          let REVIEWER_NUMBER = "SLR" + randomNum.randomNumber();
-          userDao.registerReviewer([REVIEWER_NUMBER, NAME_OF_TRIAL_OFFICER, TRIAL_STAFF_CATEGORY, COURT_NUMBER], (err, data) => {
+          let REVIEWER_NUMBER = 'SLR' + randomNum.randomNumber();
+          userDao.registerReviewer([REVIEWER_NUMBER, NAME_OF_TRIAL_OFFICER, TRIAL_STAFF_CATEGORY, COURT_NUMBER], (err) => {
             if (err) {
               console.log('审理人员注册失败，err是:', err);
               res.status(500).send();
@@ -34,6 +34,5 @@ module.exports = {
         }
       }
     });
-
   }
-}
+};

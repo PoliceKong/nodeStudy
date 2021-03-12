@@ -1,7 +1,8 @@
-const userDao = require("../dao/userDao");
-const randomNum = require("./randomNumber");
+const userDao = require('../dao/userDao');
+const randomNum = require('./randomNumber');
 module.exports = {
   insertClerk(req, res) {
+    'use strict';
     let CLERK_NAME = req.body.CLERK_NAME; //书记员姓名
     let COURT_NUMBER = req.body.COURT_NUMBER; //法院编号
     userDao.selectClerk([CLERK_NAME, COURT_NUMBER], (err, data) => {
@@ -15,8 +16,8 @@ module.exports = {
             clerkNumber: data[0].CLERK_NUMBER
           });
         } else {
-          let CLERK_NUMBER = "SJY" + randomNum.randomNumber();
-          userDao.regsiterClerk([CLERK_NUMBER, CLERK_NAME, COURT_NUMBER], (err, data) => {
+          let CLERK_NUMBER = 'SJY' + randomNum.randomNumber();
+          userDao.regsiterClerk([CLERK_NUMBER, CLERK_NAME, COURT_NUMBER], (err) => {
             if (err) {
               console.log('书记员注册失败，err是：', err);
               res.status(500).send();
@@ -32,4 +33,4 @@ module.exports = {
       }
     });
   }
-}
+};

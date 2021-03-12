@@ -1,6 +1,7 @@
-const userDao = require("../dao/userDao");
+const userDao = require('../dao/userDao');
 module.exports = {
   insertJudgMent(req, res) {
+    'use strict';
     let CASE_NUMBER = req.body.CASE_NUMBER; //获取案件编号
     let JUDGMENT_NUMBER = req.body.JUDGMENT_NUMBER; //获取判决书文号
     let DOCUMENT_NAME = req.body.DOCUMENT_NAME; //获取判决书名称
@@ -20,7 +21,7 @@ module.exports = {
             judgmentNum: JUDGMENT_NUMBER
           });
         } else {
-          userDao.registerJudgment([JUDGMENT_NUMBER, DOCUMENT_NAME, TRIAL_PROCEDURE, PUBLIC_PROSECUTION_DATE, JUDGMENT_DATE], (err, data) => {
+          userDao.registerJudgment([JUDGMENT_NUMBER, DOCUMENT_NAME, TRIAL_PROCEDURE, PUBLIC_PROSECUTION_DATE, JUDGMENT_DATE], (err) => {
             if (err) {
               console.log('判决书注册是遇到错误，err是：', err);
               res.status(500).send();
@@ -38,7 +39,7 @@ module.exports = {
                       judgmentNum: JUDGMENT_NUMBER
                     });
                   } else {
-                    userDao.bindCasenumJudgmentNum([CASE_NUMBER, JUDGMENT_NUMBER], (err, data) => {
+                    userDao.bindCasenumJudgmentNum([CASE_NUMBER, JUDGMENT_NUMBER], (err) => {
                       if (err) {
                         console.log('案件编号与文书编号绑定失败，err是：', err);
                         res.status(500).send();
@@ -60,4 +61,4 @@ module.exports = {
       }
     });
   }
-}
+};

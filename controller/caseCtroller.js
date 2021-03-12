@@ -1,9 +1,11 @@
-const userDao = require("../dao/userDao");
-const randomNum = require("./randomNumber");
+const userDao = require('../dao/userDao');
+const randomNum = require('./randomNumber');
 module.exports = {
   insertCase(req, res) {
 
+
     //获取请求数据
+    'use strict';
     let CASE_NAME = req.body.CASE_NAME; //案件名称
     let CASE_SOURCE = req.body.CASE_SOURCE; //案件来源
     let TIME_OF_CASE = req.body.TIME_OF_CASE; //发案时间
@@ -17,7 +19,7 @@ module.exports = {
         res.status(500).send();
       } else {
         if (data.length !== 0) {
-          console.log("案件已经存在,案件名称是：", CASE_NAME);
+          console.log('案件已经存在,案件名称是：', CASE_NAME);
           res.status(201).send({
             registerOK: false,
             caseNum: data[0].CASE_NUMBER,
@@ -25,22 +27,22 @@ module.exports = {
           });
         } else {
           // 无同名案件的情况下，执行注册，将新的案件信息写入数据库中
-          let CASE_NUMBER = "Case" + randomNum.randomNumber(); //生成随机6位案件编号，唯一
-          userDao.registerCase([CASE_NUMBER, CASE_NAME, CASE_SOURCE, TIME_OF_CASE, LOCATION_OF_CASE, AMOUNT_INVOLVED, NUMBER_OF_OFFENDERS, BRIEF_INTRODUCTION], (err, data) => {
+          let CASE_NUMBER = 'Case' + randomNum.randomNumber(); //生成随机6位案件编号，唯一
+          userDao.registerCase([CASE_NUMBER, CASE_NAME, CASE_SOURCE, TIME_OF_CASE, LOCATION_OF_CASE, AMOUNT_INVOLVED, NUMBER_OF_OFFENDERS, BRIEF_INTRODUCTION], (err) => {
             if (err) {
-              console.log("新案件登记，数据库出现的err是：", err);
+              console.log('新案件登记，数据库出现的err是：', err);
               res.status(500).send();
             } else {
-              console.log("案件新登记成功");
+              console.log('案件新登记成功');
               res.status(201).send({
                 registerOK: true,
                 caseNum: CASE_NUMBER,
                 caseName: CASE_NAME
               });
             }
-          })
+          });
         }
       }
     });
   }
-}
+};

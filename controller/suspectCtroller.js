@@ -1,7 +1,8 @@
-const userDao = require("../dao/userDao");
-const randomNum = require("./randomNumber");
+const userDao = require('../dao/userDao');
+const randomNum = require('./randomNumber');
 module.exports = {
   insertSuspect(req, res) {
+    'use strict';
     let SUBJECT_CATEGORY = req.body.SUBJECT_CATEGORY; //主体类别
     let NAME_OF_SUSPECT = req.body.NAME_OF_SUSPECT; //嫌疑人姓名
     let SUSPECT_GENDER = req.body.SUSPECT_GENDER; //性别
@@ -32,7 +33,7 @@ module.exports = {
               if (data.length !== 0) {
                 console.log('重复绑定');
               } else {
-                userDao.bindCaseNum_susNum([data[0].SUSPECT_NUMBER, CASE_NUMBER], (err, data) => {
+                userDao.bindCaseNum_susNum([data[0].SUSPECT_NUMBER, CASE_NUMBER], (err) => {
                   if (err) {
                     console.log('嫌疑人编号与案件编号绑定失败，err是：', err);
                     res.status(500).send();
@@ -48,8 +49,8 @@ module.exports = {
             suspectNumber: data[0].SUSPECT_NUMBER,
           });
         } else {
-          let SUSPECT_NUMBER = "R" + randomNum.randomNumber(); //生成嫌疑人编号
-          userDao.registerSuspect([SUSPECT_NUMBER, SUBJECT_CATEGORY, NAME_OF_SUSPECT, SUSPECT_GENDER, NATION, EDUCATION, DATE_OF_BIRTH, HOMETOWN, RESIDENCE_ADDRESS, CURRENT_ADDRESS, EMPLOYER, OCCUPATION, CRIME_TIME, AGE_OF_CRIME, CRIMINAL_HISTORY, CRIMINAL_BEHAVIOR], (err, data) => {
+          let SUSPECT_NUMBER = 'R' + randomNum.randomNumber(); //生成嫌疑人编号
+          userDao.registerSuspect([SUSPECT_NUMBER, SUBJECT_CATEGORY, NAME_OF_SUSPECT, SUSPECT_GENDER, NATION, EDUCATION, DATE_OF_BIRTH, HOMETOWN, RESIDENCE_ADDRESS, CURRENT_ADDRESS, EMPLOYER, OCCUPATION, CRIME_TIME, AGE_OF_CRIME, CRIMINAL_HISTORY, CRIMINAL_BEHAVIOR], (err) => {
             if (err) {
               console.log('嫌疑人登记出现错误，数据库err是：', err);
               res.status(500).send();
@@ -62,7 +63,7 @@ module.exports = {
                   if (data.length !== 0) {
                     console.log('重复绑定');
                   } else {
-                    userDao.bindCaseNum_susNum([SUSPECT_NUMBER, CASE_NUMBER], (err, data) => {
+                    userDao.bindCaseNum_susNum([SUSPECT_NUMBER, CASE_NUMBER], (err) => {
                       if (err) {
                         console.log('嫌疑人编号与案件编号绑定出错，err是：', err);
                         res.status(500).send();
@@ -81,6 +82,6 @@ module.exports = {
           });
         }
       }
-    })
+    });
   }
-}
+};

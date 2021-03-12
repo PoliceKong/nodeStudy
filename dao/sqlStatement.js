@@ -1,7 +1,7 @@
 //将具体业务的sql语句独立出来，全部存储业务需要的sql语句，对数据库内容进行集中管理CREATE TABLE newtable (
 const sqlStatement = {
   //登记案件信息
-  register_case: "insert into case_information_form(CASE_NUMBER, CASE_NAME,CASE_SOURCE, TIME_OF_CASE, LOCATION_OF_CASE,AMOUNT_INVOLVED,NUMBER_OF_OFFENDERS,BRIEF_INTRODUCTION) values(?,?,?,?,?,?,?,?);",
+  register_case: 'insert into case_information_form(CASE_NUMBER, CASE_NAME,CASE_SOURCE, TIME_OF_CASE, LOCATION_OF_CASE,AMOUNT_INVOLVED,NUMBER_OF_OFFENDERS,BRIEF_INTRODUCTION) values(?,?,?,?,?,?,?,?);',
   //查询同名案件
   select_case_name: 'select * from case_information_form where CASE_NAME=?;',
   //查询同名嫌疑人
@@ -84,8 +84,5 @@ const sqlStatement = {
 
 
 
-}
-
-
-
+};
 module.exports = sqlStatement;

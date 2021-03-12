@@ -1,11 +1,9 @@
-const {
-  response
-} = require("express");
-const userDao = require("../dao/userDao");
-const randomNum = require("./randomNumber");
+const userDao = require('../dao/userDao');
+const randomNum = require('./randomNumber');
 module.exports = {
 
   insertJidingjigou(req, res) {
+    'use strict';
     let NAME_OF_APPRAISAL_AGENCY = req.body.NAME_OF_APPRAISAL_AGENCY; //获取鉴定机构名称
     let TYPE_OF_CERTIFICATION_AGENCY = req.body.TYPE_OF_CERTIFICATION_AGENCY; //获取鉴定机构类别
     let ADMINISTRATIVE_DIVISIONS = req.body.ADMINISTRATIVE_DIVISIONS; //获取鉴定机构行政区划
@@ -31,7 +29,7 @@ module.exports = {
               if (data.length !== 0) {
                 console.log('该毒害与鉴定机构已经绑定，无需重复绑定');
               } else {
-                userDao.bindPoisonnumAndJDJGnum([POISON_NUMBER, data[0].IDENTIFICATION_AGENCY_NUMBER], (err, data) => {
+                userDao.bindPoisonnumAndJDJGnum([POISON_NUMBER, data[0].IDENTIFICATION_AGENCY_NUMBER], (err) => {
                   if (err) {
                     console.log('毒害物编号与鉴定机构编号绑定失败，err是：', err);
                     res.status(500).send();
@@ -43,8 +41,8 @@ module.exports = {
             }
           });
         } else {
-          let IDENTIFICATION_AGENCY_NUMBER = "JDJG" + randomNum.randomNumber();
-          userDao.registerJiandingjigou([IDENTIFICATION_AGENCY_NUMBER, NAME_OF_APPRAISAL_AGENCY, TYPE_OF_CERTIFICATION_AGENCY, ADMINISTRATIVE_DIVISIONS, IDENTIFICATION_SCOPE, APPRAISAL_QUALIFICATION, APPRAISER_NAME], (err, data) => {
+          let IDENTIFICATION_AGENCY_NUMBER = 'JDJG' + randomNum.randomNumber();
+          userDao.registerJiandingjigou([IDENTIFICATION_AGENCY_NUMBER, NAME_OF_APPRAISAL_AGENCY, TYPE_OF_CERTIFICATION_AGENCY, ADMINISTRATIVE_DIVISIONS, IDENTIFICATION_SCOPE, APPRAISAL_QUALIFICATION, APPRAISER_NAME], (err) => {
             if (err) {
               console.log('注册新的鉴定机构出现错误，err是：', err);
               res.status(500).send();
@@ -57,7 +55,7 @@ module.exports = {
                   if (data.length !== 0) {
                     console.log('该毒害与鉴定机构已经绑定，无需重复绑定');
                   } else {
-                    userDao.bindPoisonnumAndJDJGnum([POISON_NUMBER, IDENTIFICATION_AGENCY_NUMBER], (err, data) => {
+                    userDao.bindPoisonnumAndJDJGnum([POISON_NUMBER, IDENTIFICATION_AGENCY_NUMBER], (err) => {
                       if (err) {
                         console.log('绑定毒害物编号与鉴定机构编号失败，err是：', err);
                         res.status(500).send();
@@ -78,4 +76,4 @@ module.exports = {
       }
     });
   }
-}
+};
