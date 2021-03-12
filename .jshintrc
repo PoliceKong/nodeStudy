@@ -2,8 +2,12 @@
   "globals": {
     "$": false,
     "window": false,
-    "document": false
+    "document": false,
+    "EventEmitter": true,
+    "Promise": true
   },
+  "browser": true,
+  "node": true,
   "strict": true,
   "curly": true,
   "eqeqeq": true,
