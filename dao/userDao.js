@@ -150,9 +150,18 @@ module.exports = {
   //查询绑定的毒害物编号与鉴定机构编号
   selectpoisonnumJdjgnum(array, callback) {
     dbpool.connect(sqlStatement.selectPoisonnum_jdjgnum, array, callback);
+  },
+  //注册裁决结果
+  registerJudgmentResulte(array, callback) {
+    dbpool.connect(sqlStatement.regsiter_judgment_resulte, array, callback);
+  },
+  //注册法条信息
+  registerLegal(array, callback) {
+    dbpool.connect(sqlStatement.register_legal, array, callback);
+  },
+  //查询法条信息
+  selectLegal(array, callback) {
+    dbpool.connect(sqlStatement.select_legal, array, callback);
   }
-
-
-
 
 }

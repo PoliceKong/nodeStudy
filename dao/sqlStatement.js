@@ -74,6 +74,13 @@ const sqlStatement = {
   bind_poisonnum_jdjgnum: 'insert into poisons_and_identification_agencies_form (POISON_NUMBER,IDENTIFICATION_AGENCY_NUMBER) values (?,?);',
   //查询重复绑定的毒害物编号与鉴定机构编号
   selectPoisonnum_jdjgnum: 'select * from poisons_and_identification_agencies_form where POISON_NUMBER =? and IDENTIFICATION_AGENCY_NUMBER=?;',
+  //注册判决结果
+  regsiter_judgment_resulte: 'insert into judgment_table (JUDGMENT_RESULT_NUMBER,TYPE_OF_PENALTY,PENALTY_PERIOD,IS_PROBATION,FINE_AMOUNT,IS_ILLEGAL_INCOME,LIGHT_PLOT,SUSPECT_NUMBER) values (?,?,?,?,?,?,?,?);',
+  //注册法条信息
+  register_legal: 'insert into legal_information_form (ARTICLE_NUMBER,ACT_NAME,ACT_CLAUSE,LEGAL_CONTENT,JUDGMENT_RESULT_NUMBER) values (?,?,?,?,?);',
+  //查询法条信息
+  select_legal: 'select * from legal_information_form where ACT_NAME=? and ACT_CLAUSE =?;',
+
 
 
 

@@ -12,6 +12,8 @@ const prosecutorCtroller = require('../controller/prosecutorCtroller');
 const reviewerCtroller = require('../controller/reviewerCtroller');
 const clerkCtroller = require('../controller/clerkCtroller');
 const jiandingjigouCtroller = require('../controller/jiandingjigouCtroller');
+const judgmentResultCtroller = require('../controller/judgResultCtroller');
+const legalCtroller = require('../controller/legalCtroller');
 const route = express.Router();
 //使用post方法拦截网址
 
@@ -28,9 +30,7 @@ route.post('/prosecutor.do', prosecutorCtroller.insertProsecutor); //登记公�
 route.post('/reviewer.do', reviewerCtroller.insertReviewer); //登记审理人员
 route.post('/clerk.do', clerkCtroller.insertClerk); //登记法院书记员
 route.post('/jiandingjigou.do', jiandingjigouCtroller.insertJidingjigou); //鉴定机构登记
-
-
-
-
+route.post('/judgResult.do', judgmentResultCtroller.insertJudementResult); //裁决结构登记
+route.post('/legal.do', legalCtroller.insertLegal); //法条信息登记
 
 module.exports = route;
