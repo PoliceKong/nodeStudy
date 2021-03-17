@@ -6,6 +6,7 @@ module.exports = {
 
     //获取请求数据
     'use strict';
+    console.log('前端请求是：',req.body);
     let CASE_NAME = req.body.CASE_NAME; //案件名称
     let CASE_SOURCE = req.body.CASE_SOURCE; //案件来源
     let TIME_OF_CASE = req.body.TIME_OF_CASE; //发案时间
