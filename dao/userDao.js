@@ -201,6 +201,31 @@ module.exports = {
   selectLegal(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.select_legal, array, callback);
+  },
+  //根据案件编号查询案件信息
+  selectCaseCaseNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.selectcase_casenum, array, callback);
+  },
+  //查询所有案件
+  selectAllcase(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_allcase, array, callback);
+
+  },
+  //查询所有犯罪嫌疑人数据
+  selectAllsuspect(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_allsuspect, array, callback);
+  },
+  selectOneSuspect(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_onesuspect, array, callback);
+  },
+  //查询所有的毒害物
+  selectAllPoisons(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_allpoisons, array, callback);
   }
 
 };

@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const caseController = require('../controller/caseCtroller');
-const suspectCtroller = require("../controller/suspectCtroller");
+const suspectCtroller = require('../controller/suspectCtroller');
 const caseFoodCtroller = require('../controller/caseFoodController');
-const poisonCtroller = require("../controller/poisonCtroller");
+const poisonCtroller = require('../controller/poisonCtroller');
 const judgmentCtroller = require('../controller/judeMentCtroller');
-const policeCtroller = require("../controller/policeCtroller");
+const policeCtroller = require('../controller/policeCtroller');
 const procuratorateCtroller = require('../controller/procuratorateCtroller');
 const courtCtroller = require('../controller/courtCtroller');
 const investigtionCtro = require('../controller/investigationCtro');
@@ -25,12 +25,16 @@ route.post('/judgment.do', judgmentCtroller.insertJudgMent); //判决书基本�
 route.post('/police.do', policeCtroller.insertPolice); //侦查机关（公安机关）登记
 route.post('/procuratorate.do', procuratorateCtroller.insertProcuratorate); //公诉机关（检察院）登记
 route.post('/court.do', courtCtroller.insertCourt); //审理机关（法院）登记
-route.post('/investigation.do', investigtionCtro.insertInvestigation); //登记公诉机关
+route.post('/investigation.do', investigtionCtro.insertInvestigation); //登记侦查人员
 route.post('/prosecutor.do', prosecutorCtroller.insertProsecutor); //登记公诉人员
 route.post('/reviewer.do', reviewerCtroller.insertReviewer); //登记审理人员
 route.post('/clerk.do', clerkCtroller.insertClerk); //登记法院书记员
 route.post('/jiandingjigou.do', jiandingjigouCtroller.insertJidingjigou); //鉴定机构登记
-route.post('/judgResult.do', judgmentResultCtroller.insertJudementResult); //裁决结构登记
+route.post('/judgResult.do', judgmentResultCtroller.insertJudementResult); //裁决结果登记
 route.post('/legal.do', legalCtroller.insertLegal); //法条信息登记
-
+route.post('/selcase.do',caseController.selectCaseInfoFromNum);//根据案件编号查询案件信息
+route.post('/queryAllCases.do',caseController.selectAllcase);//查询所有的案件信息
+route.post('/queryAllsuspect.do',suspectCtroller.selectAllSuspect);//查询所有犯罪嫌疑人的信息
+route.post('/queryOnesuspect.do',suspectCtroller.selectOneSuspect);//查询一个犯罪嫌疑人的信息
+route.post('/queryAllPoisonsdata.do',poisonCtroller.selectAllPoisonData);//查询所有毒害物数据
 module.exports = route;

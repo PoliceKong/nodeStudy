@@ -3,9 +3,9 @@ const randomNum = require('./randomNumber');
 module.exports = {
   insertCourt(req, res) {
     'use strict';
-    let COURT_NAME = req.COURT_NAME; //获取法院名称
-    let COURT_LEVEL = req.COURT_LEVEL; //获取法院级别
-    let JUDGMENT_NUMBER = req.JUDGMENT_NUMBER; //判决书编号
+    let COURT_NAME = req.body.COURT_NAME; //获取法院名称
+    let COURT_LEVEL = req.body.COURT_LEVEL; //获取法院级别
+    let JUDGMENT_NUMBER = req.body.JUDGMENT_NUMBER; //判决书编号
 
     userDao.selectCourt([COURT_NAME, COURT_LEVEL], (err, data) => {
       if (err) {
@@ -20,6 +20,8 @@ module.exports = {
         } else {
           let COURT_NUMBER = 'Court' + randomNum.randomNumber();
           userDao.registerCourt([COURT_NUMBER, COURT_NAME, COURT_LEVEL], (err) => {
+            // console.log(req.body,COURT_NUMBER, COURT_NAME, COURT_LEVEL);
+            
             if (err) {
               console.log('法院注册时遇到问题，err是：', err);
               res.status(500).send();
@@ -29,7 +31,7 @@ module.exports = {
                   res.status(500).send();
                 } else {
                   if (data.changedRows === 0) {
-                    console.log('该法院已经绑定该判决书');
+                    console.log('重复绑定---该法院已经绑定该判决书');
                   } else {
                     console.log('该法院与判决书绑定成功');
                   }

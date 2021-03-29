@@ -15,8 +15,10 @@ module.exports = {
         console.log('毒害物登记产生的err是：', err);
         res.status(500).send();
       } else {
-        console.log('毒害物登记成功');
+        console.log('毒害物登记成功',[POISON_NUMBER, SCIENTIFIC_NAME_OF_POISON, POISON_ALIAS_01, POISON_ALIAS_02, TOXIC_CHEMICAL_COMPOSITION, ACTUAL_MEASUREMENT_OF_POISON]);
         userDao.selectPoisonnumFoodnum([FOOD_NUMBER, POISON_NUMBER], (err, data) => {
+          // console.log(data);
+          // console.log(err);
           if (data.length !== 0) {
             console.log('该毒害物编号与案件编号已经绑定，无需重复绑定');
             res.status(201).send({
@@ -40,5 +42,21 @@ module.exports = {
         });
       }
     });
+  },
+  //查询所有的毒害物
+  selectAllPoisonData(req,res){
+    'use strict';
+    userDao.selectAllPoisons((err,result) => {
+      if (err) {
+       console.log( '毒害物信息查询失败,错误是',err);
+       res.status(500).send();
+      } else {
+        console.log('毒害物信息查询成功');
+        res.status(200).send(result);
+        
+      }
+      
+    });
   }
+
 };

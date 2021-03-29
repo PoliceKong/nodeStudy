@@ -45,5 +45,32 @@ module.exports = {
         }
       }
     });
+  },
+  //根据案件编号查询案件信息
+  selectCaseInfoFromNum(req,res){
+    'use strict';
+    let CASE_NUMBER = req.body.CASE_NUMBER;
+    userDao.selectCaseCaseNum(CASE_NUMBER,(err,result) => {
+      if(err){
+        res.status(500).send();
+      }else{
+        res.status(200).send(result);
+      }
+    });
+
+  },
+  selectAllcase(req,res){
+    'use strict';
+    userDao.selectAllcase((err,result) => {
+      if(err){
+        res.status(500).send();
+      }else{
+        res.status(200).send(result);
+        console.log('案件信息查询成功');
+        // console.log(result);
+      }
+      
+    });
+
   }
 };

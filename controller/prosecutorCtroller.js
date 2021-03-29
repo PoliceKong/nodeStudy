@@ -5,8 +5,11 @@ module.exports = {
     'use strict';
     let PUBLIC_PROSECUTOR_NAME = req.body.PUBLIC_PROSECUTOR_NAME; //获取公诉人员名称
     let PROCURATORATE_NUMBER = req.body.PROCURATORATE_NUMBER; //获取公诉机关（检察院）编号
+    console.log('公诉人员名称是',PUBLIC_PROSECUTOR_NAME);
+    
     userDao.selectPubPro([PUBLIC_PROSECUTOR_NAME, PROCURATORATE_NUMBER], (err, data) => {
       if (err) {
+        console.log('查询公诉人员失败，err是：', err);
         res.status(500).send();
       } else {
         if (data.length !== 0) {

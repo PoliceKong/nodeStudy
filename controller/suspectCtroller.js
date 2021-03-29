@@ -83,5 +83,34 @@ module.exports = {
         }
       }
     });
+  },
+  selectAllSuspect(req,res){
+    'use strict';
+    userDao.selectAllsuspect((err,result) => {
+      if(err){
+        console.log('查询全部嫌疑人信息失败',err);
+        res.status(500).send();
+      }else{
+        console.log('查询全部嫌疑人信息成功');
+        res.status(200).send(result);  
+      }
+      
+    });
+
+  },
+  selectOneSuspect(req,res){
+    'use strict';
+    let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER;
+    userDao.selectOneSuspect([SUSPECT_NUMBER],(err,result) => {
+      if(err){
+        console.log('查询单个嫌疑人信息失败');
+        res.status(500).send();
+      }else{
+        console.log('查询单个嫌疑人信息成功');
+        res.status(200).send(result);    
+      }
+      
+    });
+
   }
 };

@@ -11,15 +11,24 @@ module.exports = {
     let LIGHT_PLOT = req.body.LIGHT_PLOT; //从轻情节
     let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER; //犯罪嫌疑人编号
     let JUDGMENT_RESULT_NUMBER = 'result' + randomNum.randomNumber(); //生成裁决结果编号
-    userDao.insertJudementResult([JUDGMENT_RESULT_NUMBER, TYPE_OF_PENALTY, PENALTY_PERIOD, IS_PROBATION, FINE_AMOUNT, IS_ILLEGAL_INCOME, LIGHT_PLOT, SUSPECT_NUMBER], (err) => {
+    userDao.registerJudgmentResulte([JUDGMENT_RESULT_NUMBER, TYPE_OF_PENALTY, PENALTY_PERIOD, IS_PROBATION, FINE_AMOUNT, IS_ILLEGAL_INCOME, LIGHT_PLOT, SUSPECT_NUMBER], (err) => {
+      console.log(req.body);
+      
       if (err) {
         res.status(500).send();
+        console.log(err);
+        
       } else {
         console.log('裁决结果登记成功');
         res.status(201).send({
           regsiterResultOk: true,
           judgmentResultNum: JUDGMENT_RESULT_NUMBER
         });
+        console.log({
+          regsiterResultOk: true,
+          judgmentResultNum: JUDGMENT_RESULT_NUMBER
+        });
+        
       }
     });
   }

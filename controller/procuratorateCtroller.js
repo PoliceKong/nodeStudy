@@ -6,13 +6,13 @@ module.exports = {
     let NAME_OF_PROCURATORATE = req.body.NAME_OF_PROCURATORATE; //获取公诉机关名称
     let PROCURATORATE_LEVEL = req.body.PROCURATORATE_LEVEL; //获取公诉机关级别
     let JUDGMENT_NUMBER = req.body.JUDGMENT_NUMBER; //获取刑事判决书的编号
-    userDao.selectProcuratorate([NAME_OF_PROCURATORATE, PROCURATORATE_LEVEL], (err, data) => {
+    userDao.selectProcuratorate([NAME_OF_PROCURATORATE, PROCURATORATE_LEVEL], (err, result) => {
       if (err) {
         res.status(500).send();
       } else {
-        if (data.length !== 0) {
-          console.log('该公诉机关已经注册，名称是：', data[0].NAME_OF_PROCURATORATE);
-          userDao.bindProcuratorateNum([data[0].PROCURATORATE_NUMBER, JUDGMENT_NUMBER], (err, data) => {
+        if (result.length !== 0) {
+          console.log('该公诉机关已经注册，名称是：', result[0].NAME_OF_PROCURATORATE);
+          userDao.bindProcuratorateNum([result[0].PROCURATORATE_NUMBER, JUDGMENT_NUMBER], (err, data) => {
             if (err) {
               console.log('判决书编号绑定公诉机关编号出错，err是：', err);
               res.status(500).send();
@@ -24,7 +24,7 @@ module.exports = {
               }
               res.status(201).send({
                 registerPROk: false,
-                procuratorateNumber: data[0].PROCURATORATE_NUMBER
+                procuratorateNumber: result[0].NAME_OF_PROCURATORATE
               });
             }
           });
@@ -36,6 +36,7 @@ module.exports = {
               res.status(500).send();
             } else {
               console.log('公诉机关注册成功');
+              //console.log(PROCURATORATE_NUMBER, NAME_OF_PROCURATORATE, PROCURATORATE_LEVEL);
             }
           });
           userDao.bindProcuratorateNum([PROCURATORATE_NUMBER, JUDGMENT_NUMBER], (err, data) => {

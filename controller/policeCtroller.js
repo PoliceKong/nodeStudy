@@ -37,6 +37,8 @@ module.exports = {
               res.status(500).send();
             } else {
               console.log('公安机关信息登记成功');
+              //console.log(req.body,INVESTIGATION_AGENCY_NUMBER, NAME_OF_INVESTIGATION_AGENCY, INVESTIGATIVE_AGENCY_LEVEL);
+              
               userDao.bindPolicenum([INVESTIGATION_AGENCY_NUMBER, JUDGMENT_NUMBER], (err, data) => {
                 if (err) {
                   console.log('判决书编号绑定公安机关编号出错，err是：', err);
