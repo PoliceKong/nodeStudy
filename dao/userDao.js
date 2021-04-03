@@ -35,7 +35,6 @@ module.exports = {
   registerCaseFood(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.register_case_food, array, callback);
-
   },
   //查询食品编号与案件编号的重复绑定
   selectCasenumFoodnum(array, callback) {
@@ -203,29 +202,49 @@ module.exports = {
     dbpool.connect(sqlStatement.select_legal, array, callback);
   },
   //根据案件编号查询案件信息
-  selectCaseCaseNum(array, callback){
+  selectCaseCaseNum(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.selectcase_casenum, array, callback);
   },
   //查询所有案件
-  selectAllcase(array, callback){
+  selectAllcase(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.select_allcase, array, callback);
-
   },
   //查询所有犯罪嫌疑人数据
-  selectAllsuspect(array, callback){
+  selectAllsuspect(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.select_allsuspect, array, callback);
   },
-  selectOneSuspect(array, callback){
+  //查询单个犯罪嫌疑人信息
+  selectOneSuspect(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.select_onesuspect, array, callback);
   },
   //查询所有的毒害物
-  selectAllPoisons(array, callback){
+  selectAllPoisons(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.select_allpoisons, array, callback);
-  }
+  },
 
+  //查询同名罪名
+  selcetSameCrime(array, callback) {
+    'use strict';
+    dbpool.connect(sqlStatement.select_same_crime, array, callback);
+  },
+  //注册罪名
+  addCrime(array, callback) {
+    'use strict';
+    dbpool.connect(sqlStatement.add_crime_info, array, callback);
+  },
+  //查詢法條信息
+  selectLegalInfo(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_same_lagal, array, callback);
+  },
+  //添加新的法條信息
+  addLegalInfo(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.add_legal_info, array, callback);
+  }
 };

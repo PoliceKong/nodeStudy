@@ -20,97 +20,176 @@ module.exports = {
     let CRIMINAL_BEHAVIOR = req.body.CRIMINAL_BEHAVIOR; //犯罪行为
     let CASE_NUMBER = req.body.CASE_NUMBER; //获取所在案件编号
     //现在数据库中查询是否存在相同的人员
-    userDao.selectSuspect([NAME_OF_SUSPECT, SUSPECT_GENDER, DATE_OF_BIRTH], (err, data) => {
-      if (err) {
-        res.status(500).send();
-      } else {
-        if (data.length !== 0) {
-          console.log('嫌疑人已经存在，名字是：', NAME_OF_SUSPECT);
-          userDao.selectCasenumSuspnum([data[0].SUSPECT_NUMBER, CASE_NUMBER], (err, data) => {
-            if (err) {
-              res.status(500).send();
-            } else {
-              if (data.length !== 0) {
-                console.log('重复绑定');
-              } else {
-                userDao.bindCaseNum_susNum([data[0].SUSPECT_NUMBER, CASE_NUMBER], (err) => {
-                  if (err) {
-                    console.log('嫌疑人编号与案件编号绑定失败，err是：', err);
-                    res.status(500).send();
-                  } else {
-                    console.log('新的案件与数据库已有的嫌疑人绑定成功！');
-                  }
-                });
-              }
-            }
-          });
-          res.status(201).send({
-            suspectOk: false,
-            suspectNumber: data[0].SUSPECT_NUMBER,
-          });
+    userDao.selectSuspect(
+      [NAME_OF_SUSPECT, SUSPECT_GENDER, DATE_OF_BIRTH],
+      (err, data) => {
+        if (err) {
+          res.status(500).send();
         } else {
-          let SUSPECT_NUMBER = 'R' + randomNum.randomNumber(); //生成嫌疑人编号
-          userDao.registerSuspect([SUSPECT_NUMBER, SUBJECT_CATEGORY, NAME_OF_SUSPECT, SUSPECT_GENDER, NATION, EDUCATION, DATE_OF_BIRTH, HOMETOWN, RESIDENCE_ADDRESS, CURRENT_ADDRESS, EMPLOYER, OCCUPATION, CRIME_TIME, AGE_OF_CRIME, CRIMINAL_HISTORY, CRIMINAL_BEHAVIOR], (err) => {
-            if (err) {
-              console.log('嫌疑人登记出现错误，数据库err是：', err);
-              res.status(500).send();
-            } else {
-              console.log('嫌疑人信息登记成功');
-              userDao.selectCasenumSuspnum([SUSPECT_NUMBER, CASE_NUMBER], (err, data) => {
+          if (data.length !== 0) {
+            console.log('嫌疑人已经存在，名字是：', NAME_OF_SUSPECT);
+            userDao.selectCasenumSuspnum(
+              [data[0].SUSPECT_NUMBER, CASE_NUMBER],
+              (err, data) => {
                 if (err) {
                   res.status(500).send();
                 } else {
                   if (data.length !== 0) {
                     console.log('重复绑定');
                   } else {
-                    userDao.bindCaseNum_susNum([SUSPECT_NUMBER, CASE_NUMBER], (err) => {
-                      if (err) {
-                        console.log('嫌疑人编号与案件编号绑定出错，err是：', err);
-                        res.status(500).send();
-                      } else {
-                        console.log('嫌疑人编号与案件编号绑定成功');
+                    userDao.bindCaseNum_susNum(
+                      [data[0].SUSPECT_NUMBER, CASE_NUMBER],
+                      (err) => {
+                        if (err) {
+                          console.log(
+                            '嫌疑人编号与案件编号绑定失败，err是：',
+                            err
+                          );
+                          res.status(500).send();
+                        } else {
+                          console.log('新的案件与数据库已有的嫌疑人绑定成功！');
+                        }
                       }
-                    });
+                    );
                   }
                 }
-              });
-              res.status(201).send({
-                suspectOk: true,
-                suspectNumber: SUSPECT_NUMBER,
-              });
+              }
+            );
+            res.status(201).send({
+              suspectOk: false,
+              suspectNumber: data[0].SUSPECT_NUMBER,
+            });
+          } else {
+            let SUSPECT_NUMBER = 'R' + randomNum.randomNumber(); //生成嫌疑人编号
+            userDao.registerSuspect(
+              [
+                SUSPECT_NUMBER,
+                SUBJECT_CATEGORY,
+                NAME_OF_SUSPECT,
+                SUSPECT_GENDER,
+                NATION,
+                EDUCATION,
+                DATE_OF_BIRTH,
+                HOMETOWN,
+                RESIDENCE_ADDRESS,
+                CURRENT_ADDRESS,
+                EMPLOYER,
+                OCCUPATION,
+                CRIME_TIME,
+                AGE_OF_CRIME,
+                CRIMINAL_HISTORY,
+                CRIMINAL_BEHAVIOR,
+              ],
+              (err) => {
+                if (err) {
+                  console.log('嫌疑人登记出现错误，数据库err是：', err);
+                  res.status(500).send();
+                } else {
+                  console.log('嫌疑人信息登记成功');
+                  userDao.selectCasenumSuspnum(
+                    [SUSPECT_NUMBER, CASE_NUMBER],
+                    (err, data) => {
+                      if (err) {
+                        res.status(500).send();
+                      } else {
+                        if (data.length !== 0) {
+                          console.log('重复绑定');
+                        } else {
+                          userDao.bindCaseNum_susNum(
+                            [SUSPECT_NUMBER, CASE_NUMBER],
+                            (err) => {
+                              if (err) {
+                                console.log(
+                                  '嫌疑人编号与案件编号绑定出错，err是：',
+                                  err
+                                );
+                                res.status(500).send();
+                              } else {
+                                console.log('嫌疑人编号与案件编号绑定成功');
+                              }
+                            }
+                          );
+                        }
+                      }
+                    }
+                  );
+                  res.status(201).send({
+                    suspectOk: true,
+                    suspectNumber: SUSPECT_NUMBER,
+                  });
+                }
+              }
+            );
+          }
+        }
+      }
+    );
+  },
+  //查询所有的犯罪嫌疑人
+  selectAllSuspect(req, res) {
+    'use strict';
+    userDao.selectAllsuspect((err, result) => {
+      if (err) {
+        console.log('查询全部嫌疑人信息失败', err);
+        res.status(500).send();
+      } else {
+        console.log('查询全部嫌疑人信息成功');
+        res.status(200).send(result);
+      }
+    });
+  },
+  //查询单个犯罪嫌疑人
+  selectOneSuspect(req, res) {
+    'use strict';
+    let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER;
+    userDao.selectOneSuspect([SUSPECT_NUMBER], (err, result) => {
+      if (err) {
+        console.log('查询单个嫌疑人信息失败');
+        res.status(500).send();
+      } else {
+        console.log('查询单个嫌疑人信息成功');
+        res.status(200).send(result);
+      }
+    });
+  },
+  //添加罪名信息
+  addCrime(req, res) {
+    'use strict';
+
+    let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER; //获取嫌疑人编号
+    let CHARGE = req.body.CHARGE; //获取罪名名称
+    userDao.selcetSameCrime([CHARGE], (err, result) => {
+      if (err) {
+        console.log('同名罪名查询失败', err);
+        res.status(500).send();
+      } else {
+        if (result.length) {
+          console.log('该罪名已经注册');
+          userDao.addCrime(
+            [result[0].COUNT_NUMBER, SUSPECT_NUMBER, CHARGE],
+            (err) => {
+              if (err) {
+                console.log('罪名綁定犯罪嫌疑人失敗', err);
+                res.status(500).send();
+              } else {
+                console.log('罪名綁定犯罪嫌疑人成功');
+                res.status(201).send();
+              }
+            }
+          );
+        } else {
+          let COUNT_NUMBER = 'charge' + randomNum.randomNumber();
+          userDao.addCrime([COUNT_NUMBER, SUSPECT_NUMBER, CHARGE], (err) => {
+            if (err) {
+              console.log('新罪名註冊失敗', err);
+              res.status(500).send();
+            } else {
+              console.log('新罪名註冊成功');
+              res.status(201).send();
             }
           });
         }
       }
     });
   },
-  selectAllSuspect(req,res){
-    'use strict';
-    userDao.selectAllsuspect((err,result) => {
-      if(err){
-        console.log('查询全部嫌疑人信息失败',err);
-        res.status(500).send();
-      }else{
-        console.log('查询全部嫌疑人信息成功');
-        res.status(200).send(result);  
-      }
-      
-    });
-
-  },
-  selectOneSuspect(req,res){
-    'use strict';
-    let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER;
-    userDao.selectOneSuspect([SUSPECT_NUMBER],(err,result) => {
-      if(err){
-        console.log('查询单个嫌疑人信息失败');
-        res.status(500).send();
-      }else{
-        console.log('查询单个嫌疑人信息成功');
-        res.status(200).send(result);    
-      }
-      
-    });
-
-  }
 };

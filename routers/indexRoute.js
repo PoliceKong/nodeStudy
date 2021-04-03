@@ -32,9 +32,11 @@ route.post('/clerk.do', clerkCtroller.insertClerk); //登记法院书记员
 route.post('/jiandingjigou.do', jiandingjigouCtroller.insertJidingjigou); //鉴定机构登记
 route.post('/judgResult.do', judgmentResultCtroller.insertJudementResult); //裁决结果登记
 route.post('/legal.do', legalCtroller.insertLegal); //法条信息登记
-route.post('/selcase.do',caseController.selectCaseInfoFromNum);//根据案件编号查询案件信息
-route.post('/queryAllCases.do',caseController.selectAllcase);//查询所有的案件信息
-route.post('/queryAllsuspect.do',suspectCtroller.selectAllSuspect);//查询所有犯罪嫌疑人的信息
-route.post('/queryOnesuspect.do',suspectCtroller.selectOneSuspect);//查询一个犯罪嫌疑人的信息
-route.post('/queryAllPoisonsdata.do',poisonCtroller.selectAllPoisonData);//查询所有毒害物数据
+route.post('/selcase.do', caseController.selectCaseInfoFromNum); //根据案件编号查询案件信息
+route.post('/queryAllCases.do', caseController.selectAllcase); //查询所有的案件信息
+route.post('/queryAllsuspect.do', suspectCtroller.selectAllSuspect); //查询所有犯罪嫌疑人的信息
+route.post('/queryOnesuspect.do', suspectCtroller.selectOneSuspect); //查询一个犯罪嫌疑人的信息
+route.post('/queryAllPoisonsdata.do', poisonCtroller.selectAllPoisonData); //查询所有毒害物数据
+route.post('/addCrime.do', suspectCtroller.addCrime); //添加犯罪罪名
+route.post('/addLegal.do',judgmentResultCtroller.addLegalInfo);//添加新的法条
 module.exports = route;

@@ -11,5 +11,5 @@ module.exports = {
       random_six = Math.round(mm * 10000000);
     }
     return random_six;
-  }
+  },
 };

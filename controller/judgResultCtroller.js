@@ -11,25 +11,87 @@ module.exports = {
     let LIGHT_PLOT = req.body.LIGHT_PLOT; //从轻情节
     let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER; //犯罪嫌疑人编号
     let JUDGMENT_RESULT_NUMBER = 'result' + randomNum.randomNumber(); //生成裁决结果编号
-    userDao.registerJudgmentResulte([JUDGMENT_RESULT_NUMBER, TYPE_OF_PENALTY, PENALTY_PERIOD, IS_PROBATION, FINE_AMOUNT, IS_ILLEGAL_INCOME, LIGHT_PLOT, SUSPECT_NUMBER], (err) => {
-      console.log(req.body);
-      
+    userDao.registerJudgmentResulte(
+      [
+        JUDGMENT_RESULT_NUMBER,
+        TYPE_OF_PENALTY,
+        PENALTY_PERIOD,
+        IS_PROBATION,
+        FINE_AMOUNT,
+        IS_ILLEGAL_INCOME,
+        LIGHT_PLOT,
+        SUSPECT_NUMBER,
+      ],
+      (err) => {
+        console.log(req.body);
+
+        if (err) {
+          res.status(500).send();
+          console.log(err);
+        } else {
+          console.log('裁决结果登记成功');
+          res.status(201).send({
+            regsiterResultOk: true,
+            judgmentResultNum: JUDGMENT_RESULT_NUMBER,
+          });
+        }
+      }
+    );
+  },
+  //添加法條信息
+  addLegalInfo(req, res) {
+    'use strict';
+    let ACT_NAME = req.body.ACT_NAME; //法案名称
+    let ACT_CLAUSE = req.body.ACT_CLAUSE; //第*条款
+    let LEGAL_CONTENT = req.body.LEGAL_CONTENT; //条款具体内容
+    let JUDGMENT_RESULT_NUMBER = req.body.JUDGMENT_RESULT_NUMBER; //裁决结果编号
+    userDao.selectLegalInfo([ACT_NAME, ACT_CLAUSE], (err, result) => {
       if (err) {
+        console.log('同名法条查询失败', err);
         res.status(500).send();
-        console.log(err);
-        
       } else {
-        console.log('裁决结果登记成功');
-        res.status(201).send({
-          regsiterResultOk: true,
-          judgmentResultNum: JUDGMENT_RESULT_NUMBER
-        });
-        console.log({
-          regsiterResultOk: true,
-          judgmentResultNum: JUDGMENT_RESULT_NUMBER
-        });
-        
+        if (result.length) {
+          console.log('该法条已经存在');
+          userDao.addLegalInfo(
+            [
+              result[0].ARTICLE_NUMBER,
+              ACT_NAME,
+              ACT_CLAUSE,
+              LEGAL_CONTENT,
+              JUDGMENT_RESULT_NUMBER,
+            ],
+            (err) => {
+              if (err) {
+                console.log('法条注册失败',err);
+                res.status(500).send();
+              } else {
+                console.log('法条注册成功');
+                res.status(201).send();
+              }
+            }
+          );
+        }else{
+          let ARTICLE_NUMBER = "legal"+randomNum.randomNumber();
+          userDao.addLegalInfo(
+            [
+              ARTICLE_NUMBER,
+              ACT_NAME,
+              ACT_CLAUSE,
+              LEGAL_CONTENT,
+              JUDGMENT_RESULT_NUMBER,
+            ],
+            (err) => {
+              if (err) {
+                console.log('法条注册失败',err);
+                res.status(500).send();
+              } else {
+                console.log('法条注册成功');
+                res.status(201).send();
+              }
+            }
+          );
+        }
       }
     });
-  }
+  },
 };
