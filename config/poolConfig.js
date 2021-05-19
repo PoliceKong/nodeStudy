@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const poolconfig = {
-  host: 'localhost',
+  host: '122.51.15.192',
   port: '3306',
   user: 'root',
-  password: '123456',
+  password: 'Kqx%075437abc',
   database: 'foodsafty'
 };
 const dbpool = {

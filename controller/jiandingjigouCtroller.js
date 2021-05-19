@@ -75,5 +75,35 @@ module.exports = {
         }
       }
     });
+  },
+  //查询所有的鉴定机构信息
+  selectAllAppraisalAgency(req,res){
+    'use strict';
+    userDao.selectAllAppraisalAgencyInfo((err,result) => {
+      if(err){
+        console.log('鉴定机构信息列表查询失败',err);
+        res.status(500).send();
+      }else{
+        console.log('鉴定机构信息列表查询成功');
+        res.status(200).send(result);
+      }
+    });
+  },
+  // 根据案例编号查询鉴定机构信息
+  selectJdjgByCaseNum(req,res){
+    'use strict';
+    let CASE_NUMBER = req.body.CASE_NUMBER; //获取所在案件编号
+    userDao.selectAppraisalagencyinfoByCaseNum([CASE_NUMBER],(err,result) => {
+      if(err){
+        console.log('根据案例编号查询鉴定机构信息失败',err);
+        res.status(500).send();
+
+      }else{
+        console.log('根据案例编号查询鉴定机构信息成功');
+        res.status(200).send(result);
+      }
+
+    });
+
   }
 };

@@ -39,4 +39,8 @@ route.post('/queryOnesuspect.do', suspectCtroller.selectOneSuspect); //查询一
 route.post('/queryAllPoisonsdata.do', poisonCtroller.selectAllPoisonData); //查询所有毒害物数据
 route.post('/addCrime.do', suspectCtroller.addCrime); //添加犯罪罪名
 route.post('/addLegal.do',judgmentResultCtroller.addLegalInfo);//添加新的法条
+route.post('/queryAllFoodInfo.do',caseFoodCtroller.selectAllFoodInfo);//查询所有的涉案食品信息
+route.post('/queryFoodByCaseNum.do',caseFoodCtroller.selectFoodByCaseNum);//根据案件编号查询所有食品
+route.post('/queryPoisonByCaseNum.do',poisonCtroller.selectPoisonsByCaseNum);//根据案件编号查询毒害物信息
+route.post('queryJdjgByCaseNum.do',jiandingjigouCtroller.selectJdjgByCaseNum);//根据案例编号查询鉴定机构信息
 module.exports = route;

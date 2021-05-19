@@ -69,7 +69,7 @@ module.exports = {
         console.log('案件信息查询成功');
         // console.log(result);
       }
-      
+
     });
 
   }

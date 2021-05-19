@@ -53,9 +53,21 @@ module.exports = {
       } else {
         console.log('毒害物信息查询成功');
         res.status(200).send(result);
-        
       }
-      
+    });
+  },
+  //根据案件编号查询毒害物信息
+  selectPoisonsByCaseNum(req,res){
+    'use strict';
+    let CASE_NUMBER = req.body.CASE_NUMBER; //获取所在案件编号
+    userDao.selectPoisoninfoByCaseNum([CASE_NUMBER],(err,result) => {
+      if(err){
+        console.log('根据案件编号查询毒害物信息失败',err);
+        res.status(500).send();
+      }else{
+        console.log('根据案例编号查询毒害物信息成功');
+        res.status(200).send(result);
+      }
     });
   }
 
