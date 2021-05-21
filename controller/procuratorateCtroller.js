@@ -58,5 +58,20 @@ module.exports = {
         }
       }
     });
+  },
+  //根据案例编号查询公诉机关信息
+  selectProcuratorateDataByCaseNum(req,res){
+    'use strict';
+    let CASE_NUMBER = req.body.CASE_NUMBER; //获取所在案件编号
+    userDao.selectProcuratorateByCaseNum([CASE_NUMBER],(err,result) => {
+      if (err) {
+        console.log('根据案例编号查询公诉机关信息失败',err);
+        res.status(500).send();
+      } else {
+        console.log('根据案例编号查询公诉机关信息成功');
+        res.status(200).send(result);
+      }
+
+    });
   }
 };

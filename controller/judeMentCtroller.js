@@ -60,5 +60,20 @@ module.exports = {
         }
       }
     });
+  },
+  //根据案例编号查询判决书信息
+  selectJudgmentInfoByCaseNum(req,res){
+    'use strict';
+    let CASE_NUMBER = req.body.CASE_NUMBER; //获取案件编号
+    userDao.selectJudgmengByCaseNum([CASE_NUMBER],(err,result) => {
+      if(err){
+        console.log('根据案例编号查询判决书基础信息失败',err);
+        res.status(500).send();
+      }else{
+        console.log('根据案例编号查询判决书基础信息成功');
+        res.status(200).send(result);
+      }
+
+    });
   }
 };

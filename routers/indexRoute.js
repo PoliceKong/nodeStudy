@@ -15,8 +15,8 @@ const jiandingjigouCtroller = require('../controller/jiandingjigouCtroller');
 const judgmentResultCtroller = require('../controller/judgResultCtroller');
 const legalCtroller = require('../controller/legalCtroller');
 const route = express.Router();
-//使用post方法拦截网址
 
+//使用post方法拦截网址
 route.post('/caseRg.do', caseController.insertCase); //案件登记
 route.post('/suspect.do', suspectCtroller.insertSuspect); //嫌疑人登记
 route.post('/casefood.do', caseFoodCtroller.insertCaseFood); //涉案食品登记
@@ -38,9 +38,20 @@ route.post('/queryAllsuspect.do', suspectCtroller.selectAllSuspect); //查询所
 route.post('/queryOnesuspect.do', suspectCtroller.selectOneSuspect); //查询一个犯罪嫌疑人的信息
 route.post('/queryAllPoisonsdata.do', poisonCtroller.selectAllPoisonData); //查询所有毒害物数据
 route.post('/addCrime.do', suspectCtroller.addCrime); //添加犯罪罪名
-route.post('/addLegal.do',judgmentResultCtroller.addLegalInfo);//添加新的法条
-route.post('/queryAllFoodInfo.do',caseFoodCtroller.selectAllFoodInfo);//查询所有的涉案食品信息
-route.post('/queryFoodByCaseNum.do',caseFoodCtroller.selectFoodByCaseNum);//根据案件编号查询所有食品
-route.post('/queryPoisonByCaseNum.do',poisonCtroller.selectPoisonsByCaseNum);//根据案件编号查询毒害物信息
-route.post('queryJdjgByCaseNum.do',jiandingjigouCtroller.selectJdjgByCaseNum);//根据案例编号查询鉴定机构信息
+route.post('/addLegal.do', judgmentResultCtroller.addLegalInfo); //添加新的法条
+route.post('/queryAllFoodInfo.do', caseFoodCtroller.selectAllFoodInfo); //查询所有的涉案食品信息
+route.post('/queryFoodByCaseNum.do', caseFoodCtroller.selectFoodByCaseNum); //根据案件编号查询所有食品
+route.post('/queryPoisonByCaseNum.do', poisonCtroller.selectPoisonsByCaseNum); //根据案件编号查询毒害物信息
+route.post('/queryJdjgByCaseNum.do', jiandingjigouCtroller.selectJdjgByCaseNum); //根据案例编号查询鉴定机构信息
+route.post(
+  '/queryJudgmentInfoByCaseNum.do',
+  judgmentCtroller.selectJudgmentInfoByCaseNum
+); //根据案例编号查询判决书基础信息
+route.post(
+  '/queryPoliceInfoByCaseNum.do',
+  policeCtroller.selectPoliceStationDataByCaseNum
+); //根据案例编号查询侦查机关信息
+route.post('queryProcuratorateInfoByCaseNum.do',procuratorateCtroller.selectProcuratorateDataByCaseNum);//根据案例编号查询公诉机关信息
+route.post('queryCourtInfoByCaseNum.do',courtCtroller.selectCourtDataByCaseNum);//根据案例编号查询审判机关信息
+
 module.exports = route;

@@ -99,7 +99,7 @@ module.exports = {
         res.status(500).send();
 
       }else{
-        console.log('根据案例编号查询鉴定机构信息成功');
+        console.log('根据案例编号查询鉴定机构信息成功',result);
         res.status(200).send(result);
       }
 

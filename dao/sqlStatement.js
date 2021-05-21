@@ -79,6 +79,8 @@ const sqlStatement = {
   //5.4 绑定案件编号与判决书编号
   bind_casenum_judgment_num:
     'insert into judgments_and_cases_form (CASE_NUMBER,JUDGMENT_NUMBER) values (?,?);',
+  //5.5 根据案例编号查询判决书基础信息
+  select_judgmentInfo_byCaseNum:'select * from judgment_information_form where JUDGMENT_NUMBER in (select JUDGMENT_NUMBER from judgments_and_cases_form where CASE_NUMBER=?);',
 
   //------------------------------------------6.侦查机关信息部分-------------------------------
   //6.1 登记侦查机关（公安机关）信息
@@ -90,6 +92,8 @@ const sqlStatement = {
   //6.3 根据判决书编号，绑定公安机关编号
   bind_police_num:
     'update judgment_information_form set INVESTIGATION_AGENCY_NUMBER =? where JUDGMENT_NUMBER =?;',
+  //6.4 根据案例编号查询侦查机关信息
+  select_police_byCaseNum:'select * from investigation_agency_information_form where INVESTIGATION_AGENCY_NUMBER in (select INVESTIGATION_AGENCY_NUMBER from judgment_information_form where JUDGMENT_NUMBER in (select JUDGMENT_NUMBER from judgments_and_cases_form where CASE_NUMBER=?));',
 
   //------------------------------------------7.公诉机关信息部分-------------------------------
   //7.1 查询同名公诉机关（检察院）
@@ -101,6 +105,8 @@ const sqlStatement = {
   //7.3 绑定公诉机关编号与判决文书编号
   bind_procuratorate_num:
     'update judgment_information_form set PROCURATORATE_NUMBER =? where JUDGMENT_NUMBER =?;',
+  //7.4 根据案例编号查询公诉机关信息
+  select_procuratorate_byCaseNum:'select * from public_prosecution_information_form where PROCURATORATE_NUMBER in (select PROCURATORATE_NUMBER from judgment_information_form where JUDGMENT_NUMBER in (select JUDGMENT_NUMBER from judgments_and_cases_form where CASE_NUMBER=?));',
 
   //--------------------------------------------8.判决机关信息部分------------------------------
   //8.1 查询同名法院
@@ -112,6 +118,8 @@ const sqlStatement = {
   //8.3 绑定法院编号与判决书编号
   bind_court_num:
     'update judgment_information_form set COURT_NUMBER =? where JUDGMENT_NUMBER =?;',
+  //8.4 根据案例编号查询审判机关信息
+  select_courtInfo_byCaseNum:'select * from information_form_of_trial_agency where COURT_NUMBER in (select COURT_NUMBER from judgment_information_form where JUDGMENT_NUMBER in (select JUDGMENT_NUMBER from judgments_and_cases_form where CASE_NUMBER=?));',
 
   //---------------------------------------------9.侦查人员信息部分-----------------------
   //9.1 查询同名侦查人员

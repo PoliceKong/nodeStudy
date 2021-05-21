@@ -131,6 +131,11 @@ module.exports = {
     'use strict';
     dbpool.connect(sqlStatement.bind_casenum_judgment_num, array, callback);
   },
+  // 5.5 根据案例编号查询判决书基础信息
+  selectJudgmengByCaseNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_judgmentInfo_byCaseNum, array, callback);
+  },
   // ----------------------------6.侦查机关信息模块-------------------------------------------
   //6.1 登记公安机关
   registerPolice(array, callback) {
@@ -146,6 +151,11 @@ module.exports = {
   bindPolicenum(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.bind_police_num, array, callback);
+  },
+  //6.4 根据案件编号查询侦查机关信息
+  selectPoliceStationByCaseNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_police_byCaseNum, array, callback);
   },
   //--------------------------- 7.公诉机关信息模块--------------------------------------------
   //7.1 查询同名公诉机关
@@ -163,6 +173,11 @@ module.exports = {
     'use strict';
     dbpool.connect(sqlStatement.bind_procuratorate_num, array, callback);
   },
+  // 7.4 根据案例编号查询公诉机关信息
+ selectProcuratorateByCaseNum(array, callback){
+  'use strict';
+  dbpool.connect(sqlStatement.select_procuratorate_byCaseNum, array, callback);
+ },
   //--------------------------- 8.审判机关信息模块--------------------------------------------
   //8.1 查询同名法院
   selectCourt(array, callback) {
@@ -178,6 +193,11 @@ module.exports = {
   bindCourtNum(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.bind_court_num, array, callback);
+  },
+  //8.4 根据案例编号查询审判机关信息
+  selectCourtInfoByCaseNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_courtInfo_byCaseNum, array, callback);
   },
   // ---------------------------9.侦查人员信息模块--------------------------------------------
   //9.1 查询同名侦查人员
