@@ -138,7 +138,7 @@ module.exports = {
       }
     });
   },
-  //查询单个犯罪嫌疑人
+  //根据嫌疑人编号查询犯罪嫌疑人信息
   selectOneSuspect(req, res) {
     'use strict';
     let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER;
@@ -148,6 +148,20 @@ module.exports = {
         res.status(500).send();
       } else {
         console.log('查询单个嫌疑人信息成功');
+        res.status(200).send(result);
+      }
+    });
+  },
+  //根据案件编号查询犯罪嫌疑人信息
+  selectSuspectDataByCaseNum(req, res) {
+    'use strict';
+    let CASE_NUMBER = req.body.CASE_NUMBER; //获取所在案件编号
+    userDao.selectSuspectByCaseNum([CASE_NUMBER], (err, result) => {
+      if (err) {
+        console.log('根据案例编号查询犯罪嫌疑人信息失败', err);
+        res.status(500).send();
+      } else {
+        console.log('根据案例编号查询犯罪嫌疑人数据成功');
         res.status(200).send(result);
       }
     });
@@ -189,6 +203,72 @@ module.exports = {
             }
           });
         }
+      }
+    });
+  },
+  //根据嫌疑人编号更新犯罪嫌疑人基础数据
+  updateSuspectBaseInfoBySuspectNum(req, res) {
+    'use strict';
+    let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER; //犯罪嫌疑人编号
+    let SUBJECT_CATEGORY = req.body.SUBJECT_CATEGORY; //主体类别
+    let NAME_OF_SUSPECT = req.body.NAME_OF_SUSPECT; //嫌疑人姓名
+    let SUSPECT_GENDER = req.body.SUSPECT_GENDER; //性别
+    let NATION = req.body.NATION; //民族
+    let EDUCATION = req.body.EDUCATION; //文化程度
+    let DATE_OF_BIRTH = req.body.DATE_OF_BIRTH; //出生日期
+    let HOMETOWN = req.body.HOMETOWN; //籍贯
+    let RESIDENCE_ADDRESS = req.body.RESIDENCE_ADDRESS; //户籍地址
+    let CURRENT_ADDRESS = req.body.CURRENT_ADDRESS; //现住址
+    let EMPLOYER = req.body.EMPLOYER; //工作单位
+    let OCCUPATION = req.body.OCCUPATION; //职业
+    let CRIME_TIME = req.body.CRIME_TIME; //犯罪时间
+    let AGE_OF_CRIME = req.body.AGE_OF_CRIME; //犯罪年龄
+    let CRIMINAL_HISTORY = req.body.CRIMINAL_HISTORY; //前科情况
+    let CRIMINAL_BEHAVIOR = req.body.CRIMINAL_BEHAVIOR; //犯罪行为
+    userDao.updateSuspectInfoBySusNum(
+      [
+        SUBJECT_CATEGORY,
+        NAME_OF_SUSPECT,
+        SUSPECT_GENDER,
+        NATION,
+        EDUCATION,
+        DATE_OF_BIRTH,
+        HOMETOWN,
+        RESIDENCE_ADDRESS,
+        CURRENT_ADDRESS,
+        EMPLOYER,
+        OCCUPATION,
+        CRIME_TIME,
+        AGE_OF_CRIME,
+        CRIMINAL_HISTORY,
+        CRIMINAL_BEHAVIOR,
+        SUSPECT_NUMBER,
+      ],
+      (err) => {
+        if (err) {
+          console.log('犯罪嫌疑人基础数据更新成功', err);
+          res.status(500).send();
+        } else {
+          console.log('犯罪嫌疑人基础数据更新成功');
+          res.status(201).send();
+        }
+      }
+    );
+  },
+  //根据罪名编号更新罪名数据
+  updateChargeInfoByChargeNum(req, res) {
+    'use strict';
+    let COUNT_NUMBER = req.body.COUNT_NUMBER;
+    let CHARGE = req.body.CHARGE;
+    userDao.updateChargeInfoByChargeNum([CHARGE,COUNT_NUMBER], (err) => {
+      if (err) {
+        console.log('根据罪名编号更新罪名失败', err);
+        console.log('罪名是',CHARGE+COUNT_NUMBER);
+
+        res.status(500).send();
+      } else {
+        console.log('根据罪名编号更新罪名成功');
+        res.status(201).send();
       }
     });
   },

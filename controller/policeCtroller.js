@@ -88,7 +88,7 @@ module.exports = {
   selectPoliceStationDataByCaseNum(req, res) {
     'use strict';
     let CASE_NUMBER = req.body.CASE_NUMBER; //获取所在案件编号
-    userDao.selectPoisoninfoByCaseNum([CASE_NUMBER], (err, result) => {
+    userDao.selectPoliceStationByCaseNum([CASE_NUMBER], (err, result) => {
       if (err) {
         console.log('根据案例编号查询侦查机关信息失败', err);
         res.status(500).send();

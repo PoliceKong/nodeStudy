@@ -75,5 +75,18 @@ module.exports = {
       }
 
     });
-  }
+  },
+  //查询所有判决书数据
+selectAllJudgmentData(req,res){
+  'use strict';
+  userDao.selectAllJudgmentData((err,result) => {
+    if(err){
+      console.log('查询所有的判决书文件失败',err);
+      res.status(500).send();
+    }else{
+      console.log('查询所有的判决书成功');
+      res.status(200).send(result);
+    }
+  });
+}
 };

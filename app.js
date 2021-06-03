@@ -22,5 +22,5 @@ route(myapp);
 //监听网络请求
 myapp.listen(port, () => {
   'use strict';
-  console.log('服务器启动成功' + 'http://localhost:3000');
+  console.log('服务器启动成功' + 'http://localhost :3000');
 });

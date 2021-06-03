@@ -71,7 +71,7 @@ module.exports = {
             }
           );
         }else{
-          let ARTICLE_NUMBER = "legal"+randomNum.randomNumber();
+          let ARTICLE_NUMBER = 'legal'+randomNum.randomNumber();
           userDao.addLegalInfo(
             [
               ARTICLE_NUMBER,
@@ -91,6 +91,58 @@ module.exports = {
             }
           );
         }
+      }
+    });
+  },
+  //根据嫌疑人编号查询裁决结果信息
+  selectJudgmentResultBySuspectNum(req,res){
+    'use strict';
+    let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER; //犯罪嫌疑人编号
+    userDao.selectJudgmentResultBySuspectNum([SUSPECT_NUMBER],(err,result) => {
+      if (err) {
+        console.log('根据嫌疑人编号查询裁决结果失败',err);
+        res.status(500).send();
+      } else {
+        console.log('根据嫌疑人编号查询裁决结果成功');
+        res.status(200).send(result);
+
+      }
+
+    });
+  },
+  //根据犯罪嫌疑人编号查询涉嫌的罪名信息
+  selectChargeResultBySuspectNum(req,res){
+    'use strict';
+    let SUSPECT_NUMBER = req.body.SUSPECT_NUMBER; //犯罪嫌疑人编号
+    userDao.selectChargeResultBySuspectNum([SUSPECT_NUMBER],(err,result) => {
+      if (err) {
+        console.log('根据嫌疑人编号查询罪名结果失败',err);
+        res.status(500).send();
+      } else {
+        console.log('根据嫌疑人编号查询罪名结果成功');
+        res.status(200).send(result);
+
+      }
+
+    });
+  },
+  //根据裁决结果编号更新裁决结果
+  updateJudgMentResultByJudgmentNum(req,res){
+    'use strict';
+    let JUDGMENT_RESULT_NUMBER=req.body.JUDGMENT_RESULT_NUMBER;
+    let TYPE_OF_PENALTY = req.body.TYPE_OF_PENALTY; //获取刑罚类别
+    let PENALTY_PERIOD = req.body.PENALTY_PERIOD; //获取刑罚期限
+    let IS_PROBATION = req.body.IS_PROBATION; //获取是否缓刑
+    let FINE_AMOUNT = req.body.FINE_AMOUNT; //罚金数额
+    let IS_ILLEGAL_INCOME = req.body.IS_ILLEGAL_INCOME; // 是否追缴违法所得
+    let LIGHT_PLOT = req.body.LIGHT_PLOT; //从轻情节
+    userDao.updateJudgmentResultByResultNum([TYPE_OF_PENALTY,PENALTY_PERIOD,IS_PROBATION,FINE_AMOUNT,IS_ILLEGAL_INCOME,LIGHT_PLOT,JUDGMENT_RESULT_NUMBER],(err) => {
+      if (err) {
+        console.log('根据裁决结果编号更新裁决结果数据失败',err);
+        res.status(500).send();
+      } else {
+        console.log('根据裁决结果编号更新裁决结果数据成功');
+        res.status(201).send();
       }
     });
   },

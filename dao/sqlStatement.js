@@ -11,6 +11,8 @@ const sqlStatement = {
     'select * from case_information_form where CASE_NUMBER=?;',
   //1.4 查询数据库中所有的案件信息
   select_allcase: 'select * from case_information_form',
+  //1.5 根据案例编号更改案例基础数据
+  update_case_base_info:'update case_information_form set CASE_NAME=?,CASE_SOURCE=?,TIME_OF_CASE=?,LOCATION_OF_CASE=?,AMOUNT_INVOLVED=?,NUMBER_OF_OFFENDERS=?,BRIEF_INTRODUCTION=?where CASE_NUMBER=?;',
 
   //----------------------------------------2.嫌疑人信息部分--------------------------------
   //2.1 查询同名嫌疑人
@@ -33,6 +35,8 @@ const sqlStatement = {
   //2.7 根据案例编号查询犯罪嫌疑人信息
   select_suspect_by_CaseNum:
     'select * from suspect_information_form where SUSPECT_NUMBER in (select SUSPECT_NUMBER from case_and_suspect_association_form where CASE_NUMBER=?);',
+  //2.8 更新犯罪嫌疑人基础数据
+  update_suspectInfo_bySuspectNum:'update suspect_information_form set SUBJECT_CATEGORY=?,NAME_OF_SUSPECT =?,SUSPECT_GENDER=?,NATION=?,EDUCATION=?, DATE_OF_BIRTH=?, HOMETOWN=?, RESIDENCE_ADDRESS=?,CURRENT_ADDRESS=?,EMPLOYER=?,OCCUPATION=?,CRIME_TIME=?,AGE_OF_CRIME=?,CRIMINAL_HISTORY=?, CRIMINAL_BEHAVIOR=?  where SUSPECT_NUMBER=?;',
 
   //---------------------------------------3.涉案食品信息部分------------------------------
   //3.1 登记涉案食品
@@ -81,6 +85,8 @@ const sqlStatement = {
     'insert into judgments_and_cases_form (CASE_NUMBER,JUDGMENT_NUMBER) values (?,?);',
   //5.5 根据案例编号查询判决书基础信息
   select_judgmentInfo_byCaseNum:'select * from judgment_information_form where JUDGMENT_NUMBER in (select JUDGMENT_NUMBER from judgments_and_cases_form where CASE_NUMBER=?);',
+  //5.6 查询所有的判决书基础数据
+  select_allJudgment:'select * from judgment_information_form',
 
   //------------------------------------------6.侦查机关信息部分-------------------------------
   //6.1 登记侦查机关（公安机关）信息
@@ -199,5 +205,16 @@ const sqlStatement = {
   //14.7 添加新的法条
   add_legal_info:
     'insert into legal_information_form (ARTICLE_NUMBER,ACT_NAME,ACT_CLAUSE,LEGAL_CONTENT,JUDGMENT_RESULT_NUMBER) values(?,?,?,?,?);',
+  //14.8 根据嫌疑人编号查询裁决结果
+  select_judgmentResult_bySuspectNum:'select * from judgment_table where SUSPECT_NUMBER =?;',
+  //14.9 根据嫌疑人编号查询触犯的罪名信息
+  select_chargeResult_bySuspectNum:'select * from charge_information_form where SUSPECT_NUMBER =?;',
+  //14.10 更新裁决结果数据，根据裁决结果编号
+  update_judgmentResult_byResultNum:'update judgment_table set TYPE_OF_PENALTY=?,PENALTY_PERIOD=?,IS_PROBATION=?,FINE_AMOUNT=?,IS_ILLEGAL_INCOME=?,LIGHT_PLOT=? where JUDGMENT_RESULT_NUMBER=?;',
+  //14.11 根据罪名编号更新罪名信息
+  update_charge_bySuspectNum:'update  charge_information_form set CHARGE=？ where COUNT_NUMBER=？;',
 };
+
+
+
 module.exports = sqlStatement;

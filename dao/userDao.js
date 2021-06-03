@@ -22,6 +22,11 @@ module.exports = {
     'use strict';
     dbpool.connect(sqlStatement.select_allcase, array, callback);
   },
+  //1.5 根据案例编号更改案例基础数据
+  updateCaseBaseInfoByCaseNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.update_case_base_info, array, callback);
+  },
   // ---------------------------2.嫌疑人信息模块------------------------------------------------
   //2.1 查询同名嫌疑人
   selectSuspect(array, callback) {
@@ -57,6 +62,11 @@ module.exports = {
   selectSuspectByCaseNum(array, callback) {
     'use strict';
     dbpool.connect(sqlStatement.select_suspect_by_CaseNum, array, callback);
+  },
+  //2.8 更新犯罪嫌疑人基础数据
+  updateSuspectInfoBySusNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.update_suspectInfo_bySuspectNum, array, callback);
   },
   //--------------------------- 3.涉案食品信息模块----------------------------------------------
   //3.1 登记涉案食品
@@ -135,6 +145,11 @@ module.exports = {
   selectJudgmengByCaseNum(array, callback){
     'use strict';
     dbpool.connect(sqlStatement.select_judgmentInfo_byCaseNum, array, callback);
+  },
+  // 5.6 查询所有判决书数据
+  selectAllJudgmentData(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_allJudgment, array, callback);
   },
   // ----------------------------6.侦查机关信息模块-------------------------------------------
   //6.1 登记公安机关
@@ -318,4 +333,25 @@ module.exports = {
     'use strict';
     dbpool.connect(sqlStatement.add_legal_info, array, callback);
   },
+  //14.8 根据犯罪嫌疑人编号查询裁决结果信息
+  selectJudgmentResultBySuspectNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_judgmentResult_bySuspectNum, array, callback);
+  },
+  //14.9 根据嫌疑人编号查询触犯的罪名信息
+  selectChargeResultBySuspectNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.select_chargeResult_bySuspectNum, array, callback);
+  },
+  // 14.10 根据裁决结果编号更新裁决结果数据
+  updateJudgmentResultByResultNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.update_judgmentResult_byResultNum, array, callback);
+  },
+  //根据罪名编号更新罪名数据
+  updateChargeInfoByChargeNum(array, callback){
+    'use strict';
+    dbpool.connect(sqlStatement.update_charge_bySuspectNum, array, callback);
+  },
+
 };
